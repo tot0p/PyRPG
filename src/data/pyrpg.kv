@@ -1,0 +1,11 @@
+#:kivy 1.8
+
+<MenuScreen>:
+    Button:
+        text: 'Hello from test.kv'
+        on_release: root.manager.current = 'settings'
+
+<SettingsScreen>:
+    Button:
+        text: 'Hello again'
+        on_release: root.manager.current = 'menu'

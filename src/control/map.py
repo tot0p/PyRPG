@@ -2,13 +2,24 @@ import random
 import math
 
 class Map:
-    def __init__(self) -> None:
+    def __init__(self,seed) -> None:
         self.width = 10
         self.height = 10
-        self.tiles = self.generate_map()
+        self._seed = seed
+        self.tiles = self.__generate_map()
 
     
-    def generate_map(self):
+    @property
+    def seed(self):
+        return self._seed
+
+    @seed.setter
+    def seed(self,val):
+        self._seed = val
+        self.tiles = self.__generate_map()
+
+    def __generate_map(self):
+        random.seed(self._seed)
         noise_map = [[0 for _ in range(self.width)] for _ in range(self.height)]
         new_value = 0
         top_of_range = 0
