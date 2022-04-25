@@ -1,4 +1,6 @@
 #:kivy 1.8
+#:import random random
+#:import sys sys
 
 <MenuScreen>:
     GridLayout:
@@ -33,9 +35,14 @@
                 hint_text : "your name"
             Label:
                 text : "Seed :"
-            TextInput:
-                id : seedNewGame
-                hint_text : "your seed"
+            GridLayout:
+                cols: 1
+                TextInput:
+                    id : seedNewGame
+                    hint_text : "your seed"
+                Button:
+                    text:'regenerate a new seed'
+                    on_release: root.ids.seedNewGame.text = str(random.randrange(sys.maxsize))
         Button:
             id :buttonCreateGame
             text: "Create Game"
