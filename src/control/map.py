@@ -3,8 +3,8 @@ import math
 
 class Map:
     def __init__(self,seed) -> None:
-        self.width = 10
-        self.height = 10
+        self.width = 200
+        self.height = 200
         self._seed = seed
         self.tiles = self.__generate_map()
 

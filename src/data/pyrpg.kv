@@ -1,11 +1,45 @@
 #:kivy 1.8
 
 <MenuScreen>:
-    Button:
-        text: 'Hello from test.kv'
-        on_release: root.manager.current = 'settings'
+    GridLayout:
+        cols: 1
+        Label:
+            id: titleMenu
+            text: "PyRPG"
+            font_size: 100
+        GridLayout:
+            id: gridMenu
+            cols: 2
 
 <SettingsScreen>:
     Button:
         text: 'Hello again'
         on_release: root.manager.current = 'menu'
+
+
+<NewGameScreen>:
+    GridLayout:
+        cols:1
+        Label:
+            id: titleNewGame
+            text: "New Game"
+            font_size: 50
+        GridLayout:
+            cols: 2
+            Label:
+                text : "Name :"
+            TextInput:
+                id : nameNewGame
+                hint_text : "your name"
+            Label:
+                text : "Seed :"
+            TextInput:
+                id : seedNewGame
+                hint_text : "your seed"
+        Button:
+            id :buttonCreateGame
+            text: "Create Game"
+
+<GameScreen>:
+    Button:
+        text: "Hello World"
