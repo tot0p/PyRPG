@@ -33,6 +33,7 @@
             TextInput:
                 id : nameNewGame
                 hint_text : "your name"
+                halign: "center"
             Label:
                 text : "Seed :"
             GridLayout:
@@ -40,6 +41,7 @@
                 TextInput:
                     id : seedNewGame
                     hint_text : "your seed"
+                    halign: "center"
                 Button:
                     text:'regenerate a new seed'
                     on_release: root.ids.seedNewGame.text = str(random.randrange(sys.maxsize))
