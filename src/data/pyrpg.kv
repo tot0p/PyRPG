@@ -49,6 +49,77 @@
             id :buttonCreateGame
             text: "Create Game"
 
+
+<CryptoScreen>:
+    canvas:
+
 <GameScreen>:
-    Button:
-        text: "Hello World"
+    GridLayout:
+        cols:3
+        GridLayout:
+            cols:1
+            size_hint: .2, 1
+            Label:
+                text:''
+        GridLayout:
+            cols:1
+            row:3
+            Label:
+                text:'the game text'
+            Label:
+                text:'what action can you do'
+            GridLayout:
+                cols:1
+                row:2
+                Label:
+                    text:'previous actions'
+                GridLayout:
+                    cols:2
+                    size_hint: 1, .2
+                    TextInput:
+                        background_color: (0, 0, 0, 1)
+                        foreground_color: (0, 1, 0, 1)
+                        cursor_color: (0, 1, 0, 1)
+                        multiline: False
+                        size_hint: .1, 1
+                        text: 'root>>'
+                        hint_text : "your action"
+                        halign: "right"
+                        cursor_blink: False
+                        readonly: True
+                    TextInput:
+                        background_color: (0, 0, 0, 1)
+                        foreground_color: (0, 1, 0, 1)
+                        cursor_color: (0, 1, 0, 1)
+                        multiline: False
+                        size_hint:.9, 1
+                        cursor_blink: False
+            Label:
+                text:''
+        GridLayout:
+            cols:1
+            row:4
+            size_hint: .1, 1
+            Label:
+                text:'minimap'
+                size_hint: .2, .4
+            Button:
+                text:'stats'
+                size_hint: .2, .4
+            Button:
+                text:'inventory'
+                size_hint: .2, .4
+            Button:
+                text:'wallet'
+                size_hint: .2, .4
+            Button:
+                text:'save and exit'
+                on_release: exit(0)
+                size_hint: .2, .4
+            Label:
+                text:''
+
+<BoxScreen>:
+    GridLayout:
+        id: CarouselGrid
+        cols:1

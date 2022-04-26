@@ -2,10 +2,9 @@
 # from src.control.entities.att import attack
 from kivy.uix.screenmanager import Screen
 from kivy.uix.button import Button
-from kivy.core.window import Window
 
+from src.control.eventKey import EventKey
 
-import re
 
 class MenuButton(Button):
     def __init__(self, func,**kwargs):
@@ -16,10 +15,10 @@ class MenuButton(Button):
         self.func()
         return super().on_release()
 
-class MenuScreen(Screen):
+class MenuScreen(Screen,EventKey):
     def __init__(self,**kwargs) -> None:
-        super().__init__(**kwargs)
-        Window.bind(on_key_down=self.key_action)
+        Screen.__init__(self,**kwargs)
+        EventKey.__init__(self)
         self.options = {"Load Game":lambda  : print("Load Game"),"New Game":lambda : self.manager.Switch("newgame"),"Options":lambda :print("Options"),"Quit":lambda : exit(0)}
         t = []
         for key in self.options:
@@ -27,6 +26,4 @@ class MenuScreen(Screen):
             button = MenuButton(self.options[key],text=str(len(t))+". "+key)
             self.ids.gridMenu.add_widget(button)
 
-    def key_action(self,keybord,keycode,_,string,textContent):
-        if keycode == 27:
-            exit(0)
+        

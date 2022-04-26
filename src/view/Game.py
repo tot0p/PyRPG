@@ -1,8 +1,11 @@
 from kivy.uix.screenmanager import  Screen
+from src.control.eventKey import EventKey
 
-class  GameScreen(Screen):
+
+class  GameScreen(Screen,EventKey):
     def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
+        Screen.__init__(self,**kwargs)
+        EventKey.__init__(self)
         self.Player = ""
         self.Map = ""
 
@@ -13,3 +16,9 @@ class  GameScreen(Screen):
     def on_enter(self, *args):
         print(self.Player,self.Map)
         return super().on_enter(*args)
+
+    def key_action(self,keybord,keycode,_,keyName,textContent):
+        if keycode == 27:
+            self.manager.Switch("pause")
+
+            
