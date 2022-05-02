@@ -30,10 +30,17 @@
             cols: 2
             Label:
                 text : "Name :"
-            TextInput:
-                id : nameNewGame
-                hint_text : "your name"
-                halign: "center"
+            GridLayout:
+                cols:1
+                Label:
+                    id: nameerror
+                    color: (1, 0, 0, 1)
+                    text : ""
+                TextInput:
+                    id : nameNewGame
+                    hint_text : "your name"
+                    halign: "center"
+                    multiline: False
             Label:
                 text : "Seed :"
             GridLayout:
@@ -42,6 +49,7 @@
                     id : seedNewGame
                     hint_text : "your seed"
                     halign: "center"
+                    multiline: False
                 Button:
                     text:'regenerate a new seed'
                     on_release: root.ids.seedNewGame.text = str(random.randrange(sys.maxsize))
@@ -49,9 +57,71 @@
             id :buttonCreateGame
             text: "Create Game"
 
-
 <CryptoScreen>:
-    canvas:
+    GridLayout:
+        id:cryptodisplay
+        cols:3
+        GridLayout:
+            cols:1
+            row:4
+            Button:
+                id:btc
+                text:"BTC"
+                on_release:root.changeCrypto("BTC-EUR")
+            Button:
+                id:eth
+                text:"ETH"
+                on_release:root.changeCrypto("ETH-EUR")
+            Button:
+                id:sol
+                text:"SOL"
+                on_release:root.changeCrypto("SOL-EUR")
+            Button:
+                id:xmr
+                text:"XMR"
+                on_release:root.changeCrypto("XMR-EUR")
+        GridLayout:
+            cols:1
+            row:6
+            GridLayout:
+                cols:1
+                id: testcanvas
+            Label:
+                text:
+            Label:
+                text:
+            Label:
+                text:
+            Button:
+                text:"buy"
+                on_release:root.buy()
+            GridLayout:
+                cols:1
+                TextInput:
+                    id:amount
+                    hint_text:"amount"
+                    multiline: False
+                    cursor_blink: False
+                    halign:"center"
+                Label:
+                    id:balanceeur
+                    text:"Balance"
+        GridLayout:
+            cols:1
+            row:6
+            Label:
+                text:
+            Label:
+                text:
+            Label:
+                text:
+            Label:
+                text:
+            Button:
+                text:"sell"
+            Label:
+                id:actprice
+                text:""
 
 <GameScreen>:
     GridLayout:
@@ -65,14 +135,17 @@
             cols:1
             row:3
             Label:
+                id: gametext
                 text:'the game text'
             Label:
+                id : textaction
                 text:'what action can you do'
             GridLayout:
                 cols:1
                 row:2
                 Label:
-                    text:'previous actions'
+                    id: previousactions
+                    text:'previous actions :'
                 GridLayout:
                     cols:2
                     size_hint: 1, .2
@@ -88,6 +161,7 @@
                         cursor_blink: False
                         readonly: True
                     TextInput:
+                        id : rootTextInput
                         background_color: (0, 0, 0, 1)
                         foreground_color: (0, 1, 0, 1)
                         cursor_color: (0, 1, 0, 1)
@@ -112,6 +186,7 @@
             Button:
                 text:'wallet'
                 size_hint: .2, .4
+                on_release: root.manager.Switch("wallet")
             Button:
                 text:'save and exit'
                 on_release: exit(0)
@@ -123,3 +198,22 @@
     GridLayout:
         id: CarouselGrid
         cols:1
+
+<PauseScreen>:
+    GridLayout:
+        cols:3
+        GridLayout:
+            cols:1
+        GridLayout:
+            cols:1
+            Button:
+                text:"resume"
+                on_release : root.manager.Switch("game")
+            Button:
+                text:"options"
+                on_release : print("option")
+            Button:
+                text:"Quit"
+                on_release: root.manager.Switch("menu")
+        GridLayout:
+            cols:1

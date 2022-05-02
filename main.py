@@ -25,4 +25,5 @@ if __name__ == "__main__":
     Window.maximize()
     # Window.fullscreen = "auto"
     Config.set('kivy', 'exit_on_escape', '0')
+    Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
     PyRPGApp().run()

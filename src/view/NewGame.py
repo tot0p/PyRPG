@@ -1,3 +1,4 @@
+from re import S
 from kivy.uix.screenmanager import  Screen
 from src.control.map import Map
 from src.control.entities.Player import Player
@@ -13,6 +14,21 @@ class  NewGameScreen(Screen,EventKey):
         self.ids.seedNewGame.text = str(random.randrange(sys.maxsize))
         self.filename = "src/data/save"
 
+    def on_enter(self, *args):
+        self.ids.nameNewGame.text = ""
+        self.ids.seedNewGame.text = str(random.randrange(sys.maxsize))
+        self.ids.nameerror.txt = ""
+        return super().on_enter(*args)
+    
+    def key_action(self, keybord, keycode, _, keyName, textContent):
+        if keycode == 13:
+            self.__createGame()
+        return super().key_action(keybord, keycode, _, keyName, textContent)
+
+
     def __createGame(self):
-        self.manager.currentGame.LaunchGame(Player(self.ids.nameNewGame.text),Map(self.ids.seedNewGame.text))
-        self.manager.Switch("game")
+        if self.ids.nameNewGame.text == "":
+            self.ids.nameerror.text = "you cant have an empty name"
+        else:
+            self.manager.currentGame.LaunchGame(Player(self.ids.nameNewGame.text),Map(self.ids.seedNewGame.text))
+            self.manager.Switch("game")

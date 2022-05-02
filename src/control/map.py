@@ -1,5 +1,16 @@
 import random
 import math
+import src.control.jsonfile as json
+
+
+class Quete:
+    def __init__(self,path,debut:str) -> None:
+        self.filename = path
+        self.listquete = json.ReadJson(path)
+        self.currentQuete = debut
+
+    def generateMap(self,seed):
+        return [(0,0,-1)]
 
 class Map:
     def __init__(self,seed) -> None:
@@ -9,6 +20,9 @@ class Map:
         self.tiles = self.__generate_map()
 
     
+    def __str__(self) -> str:
+        return  "seed : " + str(self.seed)
+
     @property
     def seed(self):
         return self._seed
