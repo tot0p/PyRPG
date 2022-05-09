@@ -19,7 +19,7 @@ class MapScreen(Screen,EventKey):
         for y in  range(player_y-2,player_y+3):
             for x in range(player_x-2,player_x+3):
                 if x <0 or y < 0:
-                    self.ids.map.add_widget(Label(text="0",font_size=30))
+                    self.ids.map.add_widget(Label(text=" ",font_size=30))
                 else:
                     self.ids.map.add_widget(Label(text=str(self.manager.currentGame.Map.tiles[y][x]),font_size=30))
 
@@ -29,7 +29,7 @@ class MapScreen(Screen,EventKey):
         for y in  range(player_y-2,player_y+3):
             for x in range(player_x-2,player_x+3):
                 if x <0 or y < 0:
-                    self.ids.map.add_widget(Label(text="0",font_size=30))
+                    self.ids.map.add_widget(Label(text=" ",font_size=30))
                 else:
                     self.ids.map.add_widget(Label(text=str(self.manager.currentGame.Map.tiles[y][x]),font_size=30))
         return super().on_enter(*args)

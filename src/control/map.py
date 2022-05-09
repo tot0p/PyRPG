@@ -38,7 +38,7 @@ class Map:
 
     def __generate_map(self):
         random.seed(self.seed)
-        dic = {"1":10,"7":60,"8":5,"3":25}
+        dic = json.ReadJson("src/data/event/gen.json")
         key = list(dic.keys())
         rangeRand = []
         for i in key:

@@ -33,6 +33,9 @@ class Wallet:
         self.btc = 1
         self.xmr = 0
 
+    def get(self,s):
+        return getattr(self,s)
+
     def rm(self,s,n):
         setattr(self,s,getattr(self,s)-n)
 
