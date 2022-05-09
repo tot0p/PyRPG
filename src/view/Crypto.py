@@ -9,7 +9,6 @@ class  CryptoScreen(Screen,EventKey):
     def __init__(self, **kwargs) -> None:
         Screen.__init__(self,**kwargs)
         EventKey.__init__(self)
-        Window.bind(on_resize=self.draw)
         self.current = "BTC-EUR"
         self.msft = yf.Ticker(self.current)
         self.hist = self.msft.history(period="1d",interval="5m")
@@ -19,7 +18,12 @@ class  CryptoScreen(Screen,EventKey):
 
     def on_enter(self, *args):
         self.draw()
+        Window.bind(on_resize=self.draw)
         return super().on_enter(*args)
+
+    def on_leave(self, *args):
+        Window.bind(on_resize = lambda x,y,z: 1+1)
+        return super().on_leave(*args)
 
     def changeCrypto(self,name):
         self.current = name
@@ -62,5 +66,3 @@ class  CryptoScreen(Screen,EventKey):
     def key_action(self,keybord,keycode,_,keyName,textContent):
         if keycode == 27:
             self.manager.Switch("game")
-        elif keycode == 8:
-            self.ids.testcanvas.canvas.clear()

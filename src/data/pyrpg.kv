@@ -174,15 +174,20 @@
             cols:1
             row:4
             size_hint: .1, 1
-            Label:
+            Button:
                 text:'minimap'
                 size_hint: .2, .4
+                on_release : root.manager.Switch("map")
             Button:
                 text:'stats'
                 size_hint: .2, .4
             Button:
                 text:'inventory'
                 size_hint: .2, .4
+            Button:
+                text:"Quest"
+                size_hint: .2, .4
+                on_release: root.manager.Switch("quest")
             Button:
                 text:'wallet'
                 size_hint: .2, .4
@@ -217,3 +222,17 @@
                 on_release: root.manager.Switch("menu")
         GridLayout:
             cols:1
+
+<MapScreen>:
+    GridLayout:
+        id : map
+        cols:5
+
+
+<QuestListScreen>:
+    GridLayout:
+        id:QuestList
+        cols:1
+        Label:
+            text:"Quest List"
+        

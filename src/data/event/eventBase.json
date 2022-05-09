@@ -1,0 +1,25 @@
+{
+    "0":{
+        "type":"ping",
+        "hist":"ping",
+        "rep":["pong"],
+        "histfin": "you did it"
+    },
+    "1":{
+        "type":"marchand",
+        "hist":"salut c moi tchoupi je marche vers l'école j'ai de nouveau amis tous ensemble on rigole",
+        "rep":[]
+    },
+    "2":{
+        "type":"caisse"
+    },
+    "3":{
+        "type":"bataille"
+    },
+    "4":{
+        "type":"intru"
+    },
+    "5":{
+        "type": "ctf"
+    }
+}

@@ -1,3 +1,4 @@
+import imp
 from kivy.uix.screenmanager import ScreenManager,  NoTransition
 from src.view.Menu import MenuScreen
 from src.view.Settings import SettingsScreen
@@ -6,6 +7,8 @@ from src.view.Game import GameScreen
 from src.view.Pause import PauseScreen
 from src.view.Box import BoxScreen
 from src.view.Crypto import CryptoScreen
+from src.view.Map import   MapScreen
+from src.view.QuestList import QuestListScreen
 
 
 
@@ -22,6 +25,8 @@ class Manager(ScreenManager):
         self.add_widget(PauseScreen(name="pause"))
         self.add_widget(BoxScreen(name="box"))
         self.add_widget(CryptoScreen(name="wallet"))
+        self.add_widget(MapScreen(name="map"))
+        self.add_widget(QuestListScreen(name="quest"))
         self.add_widget(self.currentGame)
         self.transition = NoTransition()
 

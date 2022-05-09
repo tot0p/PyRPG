@@ -1,12 +1,24 @@
+from dis import dis
 from src.control.entities.entities import entities
 
 class Player(entities):
 
-    def __init__(self,name) -> None:
+    def __init__(self,name,x=0,y=0) -> None:
         super().__init__(name,100)
+        self.x , self.y = 0,0
         self.xp = 0
         self.wallet =Wallet()
         self.inv = {}
+
+    def move(self,s:str):
+        s = s.lower()
+        dict = {
+                "top":lambda x,y : (x,y-1),
+                "bot": lambda x,y : (x,y+1),
+                "right" : lambda x,y:(x+1,y),
+                "left":lambda x,y:(x-1,y)
+        }
+        self.x , self.y = dict[s](self.x,self.y)
         
     def __str__(self):
         return "name : "+self.name+"\nhp : "+str(self.hp) + "\nxp : "+str(self.xp)
