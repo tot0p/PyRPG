@@ -1,7 +1,10 @@
 from kivy.uix.screenmanager import  Screen
 from src.control.jsonfile import ReadJson
 from src.control.eventKey import EventKey
+from src.control.eventGameManager import EventGameManager
 
+
+pathEventsFile = "./src/data/event/eventBase.json"
 
 class  GameScreen(Screen,EventKey):
     def __init__(self, **kwargs) -> None:
@@ -9,6 +12,8 @@ class  GameScreen(Screen,EventKey):
         EventKey.__init__(self)
         self.Player = ""
         self.Map = ""
+        self.event = None
+        self.eventGameManager = EventGameManager(pathEventsFile)
         self.textInput = self.ids.rootTextInput
         self.historyInput = self.ids.previousactions
         self.hist = self.ids.gametext
@@ -21,17 +26,15 @@ class  GameScreen(Screen,EventKey):
         self.Map = Map
 
     def on_enter(self, *args):
-        self.display_event("0")
+        if self.event == None:
+            self.display_event("0")
         return super().on_enter(*args)
 
-    def loadEvent(self,path,eventId):
-        event = ReadJson(path)
-        return event[eventId]
 
     def display_event(self,eventId):
-        self.event = self.loadEvent("./src/data/event/eventBase.json",eventId)
-        self.hist.text = self.event["hist"]
-        self.rep.text = " ".join([x for x in self.event["rep"]])
+        self.event = self.eventGameManager.loadEvent(eventId)
+        self.hist.text = self.event.hist
+        self.rep.text = self.event.StrRep()
 
     def on_enter_textInput(self,instance):
         self.historyInput.text = self.historyInput.text + "\n" + instance.text
@@ -42,10 +45,13 @@ class  GameScreen(Screen,EventKey):
                 self.eventPast = False
                 self.display_event(self.Map.get_event(self.Player.x,self.Player.y))
         else:
-            if instance.text.lower() in self.event["rep"]:
-                self.hist.text = self.event["histfin"] + "\n where you want to go"
-                self.rep.text = " ".join(["top","bot","right","left"])
-                self.eventPast = True
+            if instance.text.lower() in self.event.rep:
+                if self.eventGameManager.IsNormalType():
+                    self.hist.text = self.event.histfin + "\n where you want to go"
+                    self.rep.text = ",\n".join(["top","bot","right","left"])
+                    self.eventPast = True
+                else:
+                    self.manager.Switch(self.event.type)
         if len(temp)>8:
             self.historyInput.text = temp[-1]
         instance.text = ""

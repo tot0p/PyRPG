@@ -6,7 +6,7 @@ class attack:
         self.effects = effects
 
     def __str__(self) -> str:
-        return self.name
+        return self.name 
 
     def attack(self,attacker,reciver) -> None:
         reciver.hp -= self.damage

@@ -34,14 +34,22 @@ class Map:
         self.tiles = self.__generate_map()
     
     def get_event(self,x,y):
-        return str(self.tiles[y][x])
+        s = str(self.tiles[y][x])
+        self.tiles[y][x] = 0
+        return s
 
     def __generate_map(self):
         random.seed(self.seed)
-        dic = json.ReadJson("src/data/event/gen.json")
+        genPath = "src/data/event/gen.json"
+        dic = json.ReadJson(genPath)
         key = list(dic.keys())
         rangeRand = []
+        maxCheck = 0
         for i in key:
+            maxCheck += dic[i]
             rangeRand += [i for _ in range(dic[i])]
+            if maxCheck > 100:
+                raise OverflowError("generation probability sum in \""+genPath+"\" cant be higher than 100")
+
 
         return [[rangeRand[random.randint(0,99)] for _ in range(self.width) ] for _ in range(self.height) ]

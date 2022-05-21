@@ -1,20 +1,27 @@
 {
     "0":{
-        "type":"ping",
-        "hist":"ping",
-        "rep":["pong"],
-        "histfin": "you did it"
+        "type":"",
+        "hist":"Il n'y a rien ici",
+        "rep":["ok"],
+        "histfin": ""
     },
     "1":{
         "type":"marchand",
         "hist":"salut c moi tchoupi je marche vers l'école j'ai de nouveau amis tous ensemble on rigole",
-        "rep":[]
+        "rep":[],
+        "histfin": ""
     },
     "2":{
         "type":"caisse"
     },
     "3":{
-        "type":"bataille"
+        "type":"bataille",
+        "hist":"C'est l'heure du duel",
+        "rep":["ok"],
+        "histfin":"",
+        "sup":{
+            "path":"coucou"
+        }
     },
     "4":{
         "type":"intru"

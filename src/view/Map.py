@@ -30,6 +30,8 @@ class MapScreen(Screen,EventKey):
             for x in range(player_x-2,player_x+3):
                 if x <0 or y < 0:
                     self.ids.map.add_widget(Label(text=" ",font_size=30))
+                elif x == player_x and y == player_y:
+                    self.ids.map.add_widget(Label(text="😀",font_size=30))
                 else:
                     self.ids.map.add_widget(Label(text=str(self.manager.currentGame.Map.tiles[y][x]),font_size=30))
         return super().on_enter(*args)
