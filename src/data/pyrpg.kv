@@ -120,9 +120,19 @@
             Button:
                 text:"sell"
                 on_release:root.sell()
-            Label:
-                id:actprice
-                text:""
+            GridLayout:
+                cols:1
+                GridLayout:
+                    rows: 1
+                    Button:
+                        text:"Max Buy"
+                        on_release:root.maxBuy()
+                    Button:
+                        text:"Max Sell"
+                        on_release:root.maxSell()
+                Label:
+                    id:actprice
+                    text:""
 
 <GameScreen>:
     GridLayout:
@@ -256,7 +266,7 @@
             id:ActionDisplay
             text:"this is the action display"
         Label:
-            id:Enemyhp
+            id:EnemyHp
             text:"this is the enemy hp"
         Label:
             id:PlayerStats
@@ -267,4 +277,14 @@
         Label:
             id:EnemyStats
             text:"this is the enemy stats"
-        
+
+<GameOverScreen>:
+    GridLayout:
+        id:GameOver
+        cols:1
+        Label:
+            text:'GAME OVER'
+            font_size: 100
+        Button:
+            text:'RESTART'
+            on_release: root.manager.Switch("menu")

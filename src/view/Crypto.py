@@ -13,7 +13,7 @@ class  CryptoScreen(Screen,EventKey):
         self.msft = yf.Ticker(self.current)
         self.hist = self.msft.history(period="1d",interval="5m")
         self.prices = self.hist.Close
-        self.ids.actprice.text = str(self.prices[len(self.prices)-1])+" €"
+        self.ids.actprice.text = "Current Price : " + str(self.prices[len(self.prices)-1])+" €"
 
 
     def on_enter(self, *args):
@@ -51,25 +51,30 @@ class  CryptoScreen(Screen,EventKey):
         self.ids.sol.text = "SOL : " + str(self.manager.currentGame.Player.wallet.sol)
         self.ids.eth.text = "ETH : " + str(self.manager.currentGame.Player.wallet.eth)
         self.ids.xmr.text = "XMR : " + str(self.manager.currentGame.Player.wallet.xmr)
-        self.ids.balanceeur.text = "Balance : " + str(self.manager.currentGame.Player.wallet.eur)
+        self.ids.balanceeur.text = "Balance : " + str(self.manager.currentGame.Player.wallet.eur) + " €"
 
+    def maxBuy(self):
+        self.ids.amount.text = str(self.manager.currentGame.Player.wallet.eur)
+    def maxSell(self):
+        self.ids.amount.text = str(self.manager.currentGame.Player.wallet.get(self.current.lower().split("-")[0]))
 
     def buy(self):
-        try:
-            if self.eur >=float(self.ids.amount.text)*self.prices[len(self.prices)-1]:
+        try :
+            if self.manager.currentGame.Player.wallet.eur >=float(self.ids.amount.text)*self.prices[len(self.prices)-1]:
                 self.manager.currentGame.Player.wallet.eur -= float(self.ids.amount.text)*self.prices[len(self.prices)-1]
                 self.manager.currentGame.Player.wallet.add(self.current.lower().split("-")[0],float(self.ids.amount.text))
             self.draw_button()
         except:
-            print("oh non !")
+            print("non non non !")
+        
     def sell(self):
-        try:
-            if self.manager.currentGame.Player.wallet.get(self.current.lower().split("-")[0],float(self.ids.amount.text)) >=float(self.ids.amount.text):
+        try :
+            if self.manager.currentGame.Player.wallet.get(self.current.lower().split("-")[0]) >=float(self.ids.amount.text):
                 self.manager.currentGame.Player.wallet.eur += float(self.ids.amount.text)*self.prices[len(self.prices)-1]
                 self.manager.currentGame.Player.wallet.rm(self.current.lower().split("-")[0],float(self.ids.amount.text))
             self.draw_button()
         except:
-            print("oh non !")
+            print("non non non !")
         
 
 

@@ -1,14 +1,18 @@
-from dis import dis
 from src.control.entities.entities import entities
+from src.control.jsonfile import ReadJson
+from src.control.entities.att import attack
+from src.control.Items import Items , Healt
+
+
 
 class Player(entities):
 
     def __init__(self,name,x=0,y=0) -> None:
-        super().__init__(name,100)
+        super().__init__(name,100,att=[attack(**ReadJson("src/data/attacks/attacks.json")[0]),None,None,None])
         self.x , self.y = 0,0
         self.xp = 0
         self.wallet =Wallet()
-        self.inv = {}
+        self.inv = [Items("Healt potion", "ta mère", Healt, 1)]
 
     def move(self,s:str):
         s = s.lower()

@@ -6,9 +6,9 @@ def WriteJson(path: str, cont: dict):
         json.dump(cont, f)
 
 
-def ReadJson(path: str) -> dict:
+def ReadJson(path: str):
     with open(path) as f:
-        data = json.load(f)
+        data = json.loads(f.read())
     return data
 
 def ExistFile(path:str) -> bool:

@@ -2,6 +2,8 @@
 
 from src.control.entities.att import attack
 
+from random import choice
+
 
 ## Error
 class ErrorAttEntities(Exception):
@@ -14,13 +16,17 @@ class ErrorAttEntities(Exception):
 #Entities
 class entities:
 
-    def __init__(self,name,hp=100,defence=10,att=[attack("Luca"),None,None,None]) -> None:
+    def __init__(self,name,hp=100,att=[attack("Luca",10,50),attack("karim"),attack("albert"),attack("smabre")]) -> None:
         self.name = name
         self.hp = hp
-        self.defence = defence
+        self.hpMax = hp
         self._att = att
         self.status = []
+        self.resultOfLastAtt = None
 
+
+    def GetAtt(self):
+        return [i.name for i in self._att if i!=None ]
 
     @property
     def att(self):
@@ -43,7 +49,12 @@ class entities:
         self._att[id]=v[1]
 
 
-    def attack(self,name:str,target):
+    def randomAtt(self):
+        return choice(self._att)
+
+    def attack(self,name:str,target,callback=lambda:print("")):
         for i in self._att:
-            if i.name == name:
-                i.attack(self,target)
+            if i != None:
+                if i.name == name:
+                    self.resultOfLastAtt =  i.attack(self,target)
+        callback()

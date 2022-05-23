@@ -51,6 +51,9 @@ class  GameScreen(Screen,EventKey):
                     self.rep.text = ",\n".join(["top","bot","right","left"])
                     self.eventPast = True
                 else:
+                    self.hist.text = self.event.histfin + "\n where you want to go"
+                    self.rep.text = ",\n".join(["top","bot","right","left"])
+                    self.eventPast = True
                     self.manager.Switch(self.event.type)
         if len(temp)>8:
             self.historyInput.text = temp[-1]

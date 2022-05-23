@@ -1,6 +1,6 @@
 from src.control.entities.entities import entities
 
-class Ennemy(entities):
+class Enemy(entities):
 
     def __init__(self,name,loot=[0,[]]) -> None:
         super().__init__(name,100)

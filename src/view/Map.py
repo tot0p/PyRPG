@@ -44,7 +44,6 @@ class MapScreen(Screen,EventKey):
 
     def key_action(self, keybord, keycode, _, keyName, textContent):
         if keycode == 27:
-            print(self.manager.currentGame.Map.tiles)
             self.manager.Switch("game")
     
     
