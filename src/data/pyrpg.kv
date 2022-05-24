@@ -262,9 +262,19 @@
         Label:
             id:PlayerHp
             text:"this is the player hp"
-        Label:
-            id:ActionDisplay
-            text:"this is the action display"
+        GridLayout:
+            cols: 1
+            Label:
+                id:ActionDisplayPlayer
+                text:"Player Action :"
+            Label:
+                id:ActionDisplayEnemy
+                text:"Enemy Action :"
+            Label:
+                text:""
+            Label:
+                text:""
+
         Label:
             id:EnemyHp
             text:"this is the enemy hp"
@@ -287,4 +297,4 @@
             font_size: 100
         Button:
             text:'RESTART'
-            on_release: root.manager.Switch("menu")
+            on_release: root.manager.Reset()

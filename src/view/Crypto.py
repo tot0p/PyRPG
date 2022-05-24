@@ -54,7 +54,7 @@ class  CryptoScreen(Screen,EventKey):
         self.ids.balanceeur.text = "Balance : " + str(self.manager.currentGame.Player.wallet.eur) + " €"
 
     def maxBuy(self):
-        self.ids.amount.text = str(self.manager.currentGame.Player.wallet.eur)
+        self.ids.amount.text = str(self.manager.currentGame.Player.wallet.eur/self.prices[len(self.prices)-1])
     def maxSell(self):
         self.ids.amount.text = str(self.manager.currentGame.Player.wallet.get(self.current.lower().split("-")[0]))
 

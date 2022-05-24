@@ -27,7 +27,7 @@ class  GameScreen(Screen,EventKey):
 
     def on_enter(self, *args):
         if self.event == None:
-            self.display_event("0")
+            self.display_event("3")
         return super().on_enter(*args)
 
 

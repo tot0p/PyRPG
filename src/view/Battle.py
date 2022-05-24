@@ -24,10 +24,15 @@ class BattleScreen(Screen,EventKey):
     
     def Items(self,args):
         self.ids.BattleButtons.clear_widgets()
-        self.ids.BattleButtons.add_widget(Button(text="item 1",on_release=self.BattleMenu))
-        self.ids.BattleButtons.add_widget(Button(text="item 2",on_release=self.BattleMenu))
-        self.ids.BattleButtons.add_widget(Button(text="item 3",on_release=self.BattleMenu))
-        self.ids.BattleButtons.add_widget(Button(text="item 4",on_release=self.BattleMenu))
+        if len(self.Player.inv)<=0:
+            self.ids.BattleButtons.add_widget(Button(text="You have no items in your inventory",on_release=lambda x: self.BattleMenu("")))
+        else:
+            for i in self.Player.inv:
+                self.ids.BattleButtons.add_widget(Button(text=i.name+"\nUse Left : "+i.GetNumberUse(),on_release=lambda x :i.use(self.Player,self.Enemy,lambda : self.Enemy.attack(self.Enemy.randomAtt().name, self.Player,lambda : self.displayItemMessage(i)))))
+        
+    def displayItemMessage(self,item):
+        self.Player.resultOfLastAtt = item.messageAction 
+        self.BattleMenu("")
 
     def BattleMenu(self,args):
         if self.Enemy.hp <=0:
@@ -35,9 +40,9 @@ class BattleScreen(Screen,EventKey):
         if self.Player.hp <=0:
             self.manager.Switch("gameover")
         if self.Player.resultOfLastAtt != None:
-            self.ids.ActionDisplay.text += "\n"+self.Player.resultOfLastAtt
+            self.ids.ActionDisplayPlayer.text = "Player Action :"+"\n"+self.Player.resultOfLastAtt
         if self.Enemy.resultOfLastAtt != None :
-            self.ids.ActionDisplay.text += "\n"+self.Enemy.resultOfLastAtt
+            self.ids.ActionDisplayEnemy.text = "Enemy Action :"+"\n"+self.Enemy.resultOfLastAtt
         self.ids.PlayerHp.text = "Hp : " + str(self.Player.hp)
         self.ids.PlayerStats.text = "\n att : \n" + self.Player.att
         self.ids.EnemyHp.text = "Hp : " + str(self.Enemy.hp)

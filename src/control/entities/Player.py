@@ -1,7 +1,7 @@
 from src.control.entities.entities import entities
 from src.control.jsonfile import ReadJson
 from src.control.entities.att import attack
-from src.control.Items import Items , Healt
+from src.control.Items import  HealtPotions , DammagePotions
 
 
 
@@ -12,7 +12,12 @@ class Player(entities):
         self.x , self.y = 0,0
         self.xp = 0
         self.wallet =Wallet()
-        self.inv = [Items("Healt potion", "ta mère", Healt, 1)]
+        self._inv = [HealtPotions("Healt potion", "ta mère", 1),DammagePotions("DammagePot","ton père",1)]
+
+    @property
+    def inv(self):
+        return [i for i in self._inv if i.usable()]
+
 
     def move(self,s:str):
         s = s.lower()
