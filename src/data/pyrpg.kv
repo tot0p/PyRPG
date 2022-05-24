@@ -194,6 +194,7 @@
                 size_hint: .2, .4
             Button:
                 text:'inventory'
+                on_release: root.manager.Switch("inventory")
                 size_hint: .2, .4
             Button:
                 text:"Quest"
@@ -212,8 +213,14 @@
 
 <BoxScreen>:
     GridLayout:
-        id: CarouselGrid
         cols:1
+        GridLayout:
+            id: CarouselGrid
+            cols:1
+        Button:
+            id:LootboxBtn
+            text:'Open Lootbox'
+            on_release: root.open_box()
 
 <PauseScreen>:
     GridLayout:
@@ -298,3 +305,13 @@
         Button:
             text:'RESTART'
             on_release: root.manager.Reset()
+
+<InventoryScreen>:
+    GridLayout:
+        cols: 1
+        GridLayout:
+            id:Inventory
+            cols:3
+        Button:
+            text:'go back to menu'
+            on_release: root.manager.Switch("game")

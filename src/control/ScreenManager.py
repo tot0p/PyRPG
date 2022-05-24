@@ -11,6 +11,7 @@ from src.view.Map import   MapScreen
 from src.view.QuestList import QuestListScreen
 from src.view.Battle import BattleScreen
 from src.view.GameOver import GameOverScreen
+from src.view.Inventory import InventoryScreen
 
 
 
@@ -28,6 +29,7 @@ class Manager(ScreenManager):
         self.add_widget(CryptoScreen(name="wallet"))
         self.add_widget(MapScreen(name="map"))
         self.add_widget(QuestListScreen(name="quest"))
+        self.add_widget(InventoryScreen(name="inventory"))
         self.add_widget(self.currentGame)
 
         #eventGame
@@ -54,6 +56,7 @@ class Manager(ScreenManager):
         self.add_widget(CryptoScreen(name="wallet"))
         self.add_widget(MapScreen(name="map"))
         self.add_widget(QuestListScreen(name="quest"))
+        self.add_widget(InventoryScreen(name="inventory"))
         self.add_widget(self.currentGame)
 
         #eventGame

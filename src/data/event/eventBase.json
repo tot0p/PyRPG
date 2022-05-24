@@ -12,16 +12,16 @@
         "histfin": ""
     },
     "2":{
-        "type":"caisse"
+        "type":"box",
+        "hist":"you found a lootbox in the wild",
+        "rep":["ok"],
+        "histfin": ""
     },
     "3":{
         "type":"bataille",
         "hist":"C'est l'heure du duel",
         "rep":["ok"],
-        "histfin":"",
-        "sup":{
-            "path":"coucou"
-        }
+        "histfin":""
     },
     "4":{
         "type":"intru"
