@@ -60,5 +60,10 @@ class SkipCombat(Items):
         super().__init__(name, self.Skip, desc, durability,"skipped combat",cost)
 
     def Skip(self,launcher,target):
-        target.hp=0
+        if not target.isBoss:
+            self.messageAction = "skipped combat"
+            target.hp=0
+        else :
+            self.messageAction = "this item is not effective against a boss"
+            self.durability += 1
 

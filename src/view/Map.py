@@ -6,7 +6,7 @@ from kivy.uix.gridlayout import GridLayout
 
 class MapScreen(Screen, EventKey):
     def __init__(self, **kwargs) -> None:
-        self.mapIco = {"0": "⬛", "1": "👤", "2": "🎁", "3": "💥"}
+        self.mapIco = {"-1":"🚩","0": "⬛", "1": "👤", "2": "🎁", "3": "💥"}
 
         Screen.__init__(self, **kwargs)
         EventKey.__init__(self)
@@ -17,12 +17,12 @@ class MapScreen(Screen, EventKey):
         for y in range(player_y - 2, player_y + 3):
             for x in range(player_x - 2, player_x + 3):
                 if x < 0 or y < 0:
-                    self.ids.map.add_widget(Label(text=" ", font_size=40))
+                    self.ids.map.add_widget(Label(text=" ", font_size=30))
                 elif x == player_x and y == player_y:
                     self.ids.map.add_widget(
                         Label(
                             text="🤖",
-                            font_size=40,
+                            font_size=30,
                             font_name="./src/font/NotoEmoji-VariableFont_wght.ttf",
                         )
                     )
@@ -32,7 +32,7 @@ class MapScreen(Screen, EventKey):
                             text=self.mapIco[
                                 str(self.manager.currentGame.Map.tiles[y][x])
                             ],
-                            font_size=40,
+                            font_size=30,
                             font_name="./src/font/NotoEmoji-VariableFont_wght.ttf",
                         )
                     )

@@ -15,6 +15,7 @@ from src.view.Inventory import InventoryScreen
 from src.view.Stats import StatsScreen
 from src.view.LevelUp import LevelUpScreen
 from src.view.Marchand import MarchandScreen
+from src.view.Win import WinScreen
 
 
 
@@ -33,6 +34,7 @@ class Manager(ScreenManager):
         self.add_widget(QuestListScreen(name="quest"))
         self.add_widget(InventoryScreen(name="inventory"))
         self.add_widget(StatsScreen(name="stats"))
+        self.add_widget(WinScreen(name="win"))
         self.add_widget(self.currentGame)
 
         #eventGame
@@ -74,6 +76,7 @@ class Manager(ScreenManager):
         self.add_widget(QuestListScreen(name="quest"))
         self.add_widget(InventoryScreen(name="inventory"))
         self.add_widget(StatsScreen(name="stats"))
+        self.add_widget(WinScreen(name="win"))
         self.add_widget(self.currentGame)
 
         #eventGame

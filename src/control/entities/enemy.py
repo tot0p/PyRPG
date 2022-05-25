@@ -7,6 +7,7 @@ class Enemy(entities):
     def __init__(self,name,hp,att,xpReward = 100) -> None:
         super().__init__(name,hp,att)
         self.xpReward = xpReward
+        self.isBoss = False
 
         
     def __str__(self):

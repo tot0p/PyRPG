@@ -22,11 +22,5 @@
         "hist":"C'est l'heure du duel",
         "rep":["ok"],
         "histfin":""
-    },
-    "4":{
-        "type":"intru"
-    },
-    "5":{
-        "type": "ctf"
     }
 }

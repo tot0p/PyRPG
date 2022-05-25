@@ -70,9 +70,9 @@ class BoxScreen(Screen,EventKey):
             self.i+=1
         
     
-    # def key_action(self, keybord, keycode, _, keyName, textContent):
-    #     if keycode == 27:
-    #         self.carousel.load_next(mode='next')
+    def key_action(self, keybord, keycode, _, keyName, textContent):
+        if keycode == 27:
+            print("nothing")
     
     
 

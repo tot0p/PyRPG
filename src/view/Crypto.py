@@ -61,7 +61,7 @@ class  CryptoScreen(Screen,EventKey):
 
     def buy(self):
         try :
-            if self.manager.currentGame.Player.wallet.eur >=float(self.ids.amount.text)*self.prices[len(self.prices)-1]:
+            if float(self.ids.amount.text)>0 and self.manager.currentGame.Player.wallet.eur >=float(self.ids.amount.text)*self.prices[len(self.prices)-1]:
                 self.manager.currentGame.Player.wallet.eur -= float(self.ids.amount.text)*self.prices[len(self.prices)-1]
                 self.manager.currentGame.Player.wallet.add(self.current.lower().split("-")[0],float(self.ids.amount.text))
             self.draw_button()
@@ -70,7 +70,7 @@ class  CryptoScreen(Screen,EventKey):
         
     def sell(self):
         try :
-            if self.manager.currentGame.Player.wallet.get(self.current.lower().split("-")[0]) >=float(self.ids.amount.text):
+            if float(self.ids.amount.text)>0 and self.manager.currentGame.Player.wallet.get(self.current.lower().split("-")[0]) >=float(self.ids.amount.text):
                 self.manager.currentGame.Player.wallet.eur += float(self.ids.amount.text)*self.prices[len(self.prices)-1]
                 self.manager.currentGame.Player.wallet.rm(self.current.lower().split("-")[0],float(self.ids.amount.text))
             self.draw_button()

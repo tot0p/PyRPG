@@ -1,44 +1,66 @@
 [
     {
-        "name":"looking for a member of anonimus",
+        "name":"Searching for port 80",
         "enn":{
-            "name":"member of anonimus",
+            "name":"Cloudflare",
             "hp":150,
             "att":[{
-                "name": "netcat",
+                "name": "redirection",
                 "damage": 10,
                 "reusite": 50,
-                "missMessage": "Miaouh",
-                "succesMessage": "your proxy is so bad"
+                "missMessage": "the redirection failed",
+                "succesMessage": "your not searching at the right place now"
             },
             {
-                "name": "wireshark",
+                "name": "error-404",
                 "damage": 15,
                 "reusite": 45,
-                "missMessage": "oh no , i'm saw Jaws for to long",
-                "succesMessage": "My teeth are so sharp"
+                "missMessage": "oh no it wasn't effective",
+                "succesMessage": "you seem a bit lost"
             }
             ]
         }
     },
     {
-        "name":"looking for a member of anonimus",
+        "name":"Defeating the firewall",
         "enn":{
-            "name":"member of anonimus",
+            "name":"The firewall",
             "hp":150,
             "att":[{
-                "name": "netcat",
+                "name": "packet-filtering",
                 "damage": 10,
                 "reusite": 50,
-                "missMessage": "Miaouh",
-                "succesMessage": "your proxy is so bad"
+                "missMessage": "the packet passed liked there wasn't any wall",
+                "succesMessage": "BLOCKED"
             },
             {
-                "name": "wireshark",
+                "name": "proxies",
                 "damage": 15,
                 "reusite": 45,
-                "missMessage": "oh no , i'm saw Jaws for to long",
-                "succesMessage": "My teeth are so sharp"
+                "missMessage": "he went throught the proxies",
+                "succesMessage": "your ip was blocked"
+            }
+            ]
+        }
+    },
+    {
+        "name":"The main server",
+        "enn":{
+            "name":"Head of the anonymous",
+            "hp":150,
+            "att":[{
+                "name": "ZeuS",
+                "damage": 10,
+                "reusite": 50,
+                "missMessage": "the botnet has stopped responding",
+                "succesMessage": "botnet targer spotted"
+            },
+            {
+                "name": "Wannacry",
+                "damage": 15,
+                "reusite": 45,
+                "missMessage": "he found the deactivation key",
+                "succesMessage": "do you wannacry little baby"
             }
             ]
         }

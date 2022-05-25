@@ -1,7 +1,8 @@
 from kivy.uix.screenmanager import  Screen
-from src.control.jsonfile import ReadJson
+from src.control.jsonfile import ReadJson,WriteJson
 from src.control.eventKey import EventKey
 from src.control.eventGameManager import EventGameManager
+
 
 
 pathEventsFile = "./src/data/event/eventBase.json"
@@ -21,10 +22,12 @@ class  GameScreen(Screen,EventKey):
         self.eventPast = False
         self.rep = self.ids.textaction
         self.textInput.bind(on_text_validate=self.on_enter_textInput)
+        self.posDep = []
 
     def LaunchGame(self,Player,Map):
         self.Player = Player
         self.Map = Map
+        
 
     def on_enter(self, *args):
         if self.event == None:
@@ -33,7 +36,7 @@ class  GameScreen(Screen,EventKey):
 
 
     def display_event(self,eventId):
-        self.event = self.eventGameManager.loadEvent(eventId)
+        self.event, self.special = self.eventGameManager.loadEvent(eventId)
         self.hist.text = self.event.hist
         self.rep.text = self.event.StrRep()
 
@@ -41,7 +44,7 @@ class  GameScreen(Screen,EventKey):
         self.historyInput.text = self.historyInput.text + "\n" + instance.text
         temp = self.historyInput.text.split("\n")
         if self.eventPast:
-            if instance.text.lower() in ["top","bot","right","left"]:
+            if instance.text.lower() in self.posDep:
                 self.Player.move(instance.text)
                 self.eventPast = False
                 self.display_event(self.Map.get_event(self.Player.x,self.Player.y))
@@ -49,16 +52,29 @@ class  GameScreen(Screen,EventKey):
             if instance.text.lower() in self.event.rep:
                 if self.eventGameManager.IsNormalType():
                     self.hist.text = self.event.histfin + "\n where you want to go"
-                    self.rep.text = ",\n".join(["top","bot","right","left"])
+                    self.generatePosDep()
+                    self.rep.text = ",\n".join(self.posDep)
                     self.eventPast = True
                 else:
                     self.hist.text = self.event.histfin + "\n where you want to go"
-                    self.rep.text = ",\n".join(["top","bot","right","left"])
+                    self.generatePosDep()
+                    self.rep.text = ",\n".join(self.posDep)
                     self.eventPast = True
                     self.manager.Switch(self.event.type)
         if len(temp)>8:
             self.historyInput.text = temp[-1]
         instance.text = ""
+
+    def generatePosDep(self):
+        self.posDep = []
+        if self.Player.y > 0:
+            self.posDep.append("up")
+        if self.Player.y < 20:
+            self.posDep.append("down")
+        if self.Player.x > 0:
+            self.posDep.append("left")
+        if self.Player.x < 20:
+            self.posDep.append("right")
 
 
     def key_action(self,keybord,keycode,_,keyName,textContent):

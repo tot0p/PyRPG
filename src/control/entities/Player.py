@@ -2,6 +2,7 @@ from src.control.entities.entities import entities
 from src.control.jsonfile import ReadJson
 from src.control.entities.att import attack
 from src.control.Items import  HealtPotions , DammagePotions , SkipCombat
+from src.view.Crypto import GetPrice
 
 
 
@@ -18,7 +19,7 @@ class Player(entities):
             HealtPotions("virus protection plan", "cleaning viruses away\ngives 50hp", 0,50,250),
             DammagePotions("usb killer","fries you oponent pc with hight voltage\ndeals 10hp",1,10,100),
             DammagePotions("bad overclocking", "set you opponent pc in flames\ndeals 50hp", 0,50,1000),
-            SkipCombat("no connection", "skips a combat single use only and not usable on bosses", 0,2500),
+            SkipCombat("no connection", "skips a combat single use only and not usable on bosses", 2,2500),
             ]
 
     def levelUp(self,xpReward):
@@ -58,8 +59,8 @@ class Player(entities):
     def move(self,s:str):
         s = s.lower()
         dict = {
-                "top":lambda x,y : (x,y-1),
-                "bot": lambda x,y : (x,y+1),
+                "up":lambda x,y : (x,y-1),
+                "down": lambda x,y : (x,y+1),
                 "right" : lambda x,y:(x+1,y),
                 "left":lambda x,y:(x-1,y)
         }
@@ -74,10 +75,10 @@ class Player(entities):
 class Wallet:
     def __init__(self) -> None:
         self.eur = 100
-        self.eth = 10
-        self.sol = 2
-        self.btc = 1
-        self.xmr = 0
+        self.eth = GetPrice("eth")
+        self.sol =  GetPrice("sol")
+        self.btc =  GetPrice("btc")
+        self.xmr =  GetPrice("xmr")
 
     def get(self,s):
         return getattr(self,s)

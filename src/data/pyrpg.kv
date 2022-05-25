@@ -287,15 +287,41 @@
 
 <QuestListScreen>:
     GridLayout:
-        id:QuestList
+        cols:1
+        GridLayout:
+            id:QuestList
+            cols:1
+            Label:
+                text:"Quest List"
+        Button:
+            text:'go back to menu'
+            on_release: root.manager.Switch("game")
+
+<WinScreen>
+    GridLayout:
+        id:Win
         cols:1
         Label:
-            text:"Quest List"
+            text:'You Win The Game !!!'
+            font_size: 100
+        Button:
+            text:'Open you lootbox'
+            on_release: root.manager.Switch("box")
 
 <BattleScreen>:
     GridLayout:
         id:BattleGrid
         cols:3
+        Label:
+            id:PlayerName
+            font_size: 30
+            text:''
+        Label:
+            text:''
+        Label:
+            id:EnemyName
+            font_size: 30
+            text:''
         Image:
             source: './src/data/img/player.gif'
             size: 500, 500

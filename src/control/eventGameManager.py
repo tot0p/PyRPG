@@ -28,7 +28,11 @@ class EventGameManager:
             id = self.currentId
         else:
             self.currentId = id
-        return self.all_events[id]
+        if id != "-1":
+            return self.all_events[id] , False
+        else:
+            self.currentId = "3"
+            return self.all_events["3"] , True
 
     def IsNormalType(self,id=""):
         if id =="":

@@ -3,30 +3,42 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from src.control.eventKey import EventKey
 from src.control.entities.enemy import Enemy , LoadEnemy
-from src.control.entities.att import GetAllAtt
+from src.control.entities.att import GetAllAtt , attack
 from random import choice
 
 class BattleScreen(Screen,EventKey):
     def __init__(self,**kwargs) -> None:
         Screen.__init__(self,**kwargs)
         EventKey.__init__(self)
+        self.bossBattel = False
 
 
     def createEnemy(self):
         temp = self.manager.currentGame.MonsterFight
-        if temp < 3:
-            self.Enemy = LoadEnemy(temp)
+        if self.manager.currentGame.special:
+            t = self.manager.currentGame.Map.quest[0].GetBoss()
+            att = []
+            for i in t["att"]:
+                att.append(attack(**i))
+            self.Enemy = Enemy(t["name"], t["hp"], att)
+            self.bossBattel = True
+            self.Enemy.isBoss=True
         else:
-            r = GetAllAtt()
-            att = [choice(r),choice(r),choice(r),choice(r)]
-            for i in att:
-                i.damage += self.manager.currentGame.MonsterFight
-            self.Enemy = Enemy("Strong Hackerman", 150, att)
-        self.manager.currentGame.MonsterFight +=1
+            if temp < 3:
+                self.Enemy = LoadEnemy(temp)
+            else:
+                r = GetAllAtt()
+                att = [choice(r),choice(r),choice(r),choice(r)]
+                for i in att:
+                    i.damage += self.manager.currentGame.MonsterFight
+                self.Enemy = Enemy("Strong Hackerman", 150, att)
+            self.manager.currentGame.MonsterFight +=1
 
     def on_enter(self):
         self.createEnemy()
         self.Player = self.manager.currentGame.Player
+        self.ids.PlayerName.text = self.Player.name
+        self.ids.EnemyName.text = self.Enemy.name
         self.BattleMenu("")
 
         return Screen.on_enter(self)
@@ -36,6 +48,11 @@ class BattleScreen(Screen,EventKey):
         self.Enemy.resultOfLastAtt = None
         self.ids.ActionDisplayPlayer.text = "Player Action :"
         self.ids.ActionDisplayEnemy.text = "Enemy Action :"
+        if self.bossBattel:
+            t = self.manager.currentGame.Map.NextQuest()
+            self.bossBattel = False
+            if t :
+                self.manager.Switch("win")
         return Screen.on_leave(self)
         
     def Attack(self,args):
@@ -77,4 +94,6 @@ class BattleScreen(Screen,EventKey):
         self.ids.BattleButtons.add_widget(Button(text="attack",on_release=self.Attack))
         self.ids.BattleButtons.add_widget(Button(text="items",on_release=self.Items))
 
-        
+    def key_action(self, keybord, keycode, _, keyName, textContent):
+        if keycode == 27:
+            self.BattleMenu("")

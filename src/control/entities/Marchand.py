@@ -26,7 +26,6 @@ class Marchand:
         for i in self.items:
             if i[0] == name:
                 self.items.remove(i)
-                print(self.items)
                 return
 
     def buy(self,name,callback):
