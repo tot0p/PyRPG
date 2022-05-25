@@ -81,3 +81,10 @@ class  CryptoScreen(Screen,EventKey):
     def key_action(self,keybord,keycode,_,keyName,textContent):
         if keycode == 27:
             self.manager.Switch("game")
+
+def GetPrice(crypto):
+    current = crypto.upper()+"-EUR"
+    msft = yf.Ticker(current)
+    hist = msft.history(period="1d",interval="5m")
+    prices = hist.Close
+    return 100/prices[len(prices)-1]

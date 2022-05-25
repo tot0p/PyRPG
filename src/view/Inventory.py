@@ -12,6 +12,9 @@ class InventoryScreen(Screen,EventKey):
     def on_enter(self):
         for i in self.manager.currentGame.Player.inv:
             self.ids.Inventory.add_widget(Label(text="Name : "+i.name+"\nDescription : "+i.desc+"\nUses Left : "+i.GetNumberUse()+"\nCost : "+str(i.cost)+" €"))
+            
+    def on_leave(self):
+        self.ids.Inventory.clear_widgets()
 
     def key_action(self,keybord,keycode,_,keyName,textContent):
         if keycode == 27:

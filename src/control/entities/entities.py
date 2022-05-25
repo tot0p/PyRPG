@@ -5,13 +5,6 @@ from src.control.entities.att import attack
 from random import choice
 
 
-## Error
-class ErrorAttEntities(Exception):
-    def __init__(self,maxi,obj, *args: object) -> None:
-        super().__init__(*args)
-        self.max = maxi
-        self.obj = obj
-
 
 #Entities
 class entities:
@@ -26,6 +19,9 @@ class entities:
 
 
     def GetAtt(self):
+        return [i for i in self._att if i!=None ]
+
+    def GetAttName(self):
         return [i.name for i in self._att if i!=None ]
 
     @property
@@ -39,13 +35,24 @@ class entities:
 
     @att.setter
     def att(self,v):
+        '''
+        est le setter de self.att qui prend comme expression type :
+            votreEntities.att = (idDeLAttaque,LobjetAtt)
+
+        !!!!!!
+            on peut que assigner avec un tuple
+
+        '''
+        print("setter att")
+        print(v[1].name)
+        print(v[0])
         assert isinstance(v,tuple) ; "la valeur n'est pas un tuple"
         assert len(v)==2 ; "il n'y a pas le nombre de valeur demandé dans la valeur"
         assert isinstance(v[0],int) ; "v[0] n'est pas un int"
         assert isinstance(v[1],attack); "v[1] n'est pas un obj attack"
         id = v[0]
-        if id > len(self._att):
-            raise ErrorAttEntities(len(self._att,self))
+        assert id <=len(self._att); "l'id est trop grand max 3"
+        assert id >=0 ; "l'id est trop petit min 0"
         self._att[id]=v[1]
 
 

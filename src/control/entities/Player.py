@@ -1,7 +1,7 @@
 from src.control.entities.entities import entities
 from src.control.jsonfile import ReadJson
 from src.control.entities.att import attack
-from src.control.Items import  HealtPotions , DammagePotions
+from src.control.Items import  HealtPotions , DammagePotions , SkipCombat
 
 
 
@@ -11,8 +11,22 @@ class Player(entities):
         super().__init__(name,100,att=[attack(**ReadJson("src/data/attacks/attacks.json")[0]),None,None,None])
         self.x , self.y = 0,0
         self.xp = 0
+        self.level = 1
         self.wallet =Wallet()
-        self._inv = [HealtPotions("Healt potion", "ta mère", 1),DammagePotions("DammagePot","ton père",1)]
+        self._inv = [
+            HealtPotions("Antivirus", "la base virale vps a été mise a jours\ngives 20hp", 1),
+            DammagePotions("usb killer","fries you oponent pc with hight voltage\ndeals 10hp",1),
+            SkipCombat("no connection", "skips a combat single use only and not usable on bosses", 0),
+            ]
+
+    def levelUp(self,xpReward):
+        assert xpReward > 0 ; "xpReward can't < 0"
+        self.xp += xpReward
+        if self.xp >= self.level * 100:
+            self.xp -= self.level * 100
+            self.level +=1
+            return True
+        return False
 
     @property
     def inv(self):
@@ -28,6 +42,7 @@ class Player(entities):
                 "left":lambda x,y:(x-1,y)
         }
         self.x , self.y = dict[s](self.x,self.y)
+
         
     def __str__(self):
         return "name : "+self.name+"\nhp : "+str(self.hp) + "\nxp : "+str(self.xp)

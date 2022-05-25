@@ -46,3 +46,15 @@ class DammagePotions(Items):
 
     def Dammage(self,launcher,target):
         target.hp -= self.dammage
+
+
+
+
+class SkipCombat(Items):
+    def __init__(self, name,desc, durability,skip=True):
+        self.skip = skip
+        super().__init__(name, self.Skip, desc, durability,"skipped combat")
+
+    def Skip(self,launcher,target):
+        target.hp=0
+

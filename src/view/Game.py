@@ -27,7 +27,7 @@ class  GameScreen(Screen,EventKey):
 
     def on_enter(self, *args):
         if self.event == None:
-            self.display_event("0")
+            self.display_event(self.Map.get_event(self.Player.x,self.Player.y))
         return super().on_enter(*args)
 
 

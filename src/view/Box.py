@@ -6,7 +6,7 @@ from src.control.CarrouselBox import CarrouselBox
 from kivy.uix.image import AsyncImage
 from kivy.clock import Clock
 from random import choice
-from time import sleep
+from src.view.Crypto import GetPrice
     
 class BoxScreen(Screen,EventKey):
     def __init__(self, **kwargs) -> None:
@@ -14,7 +14,19 @@ class BoxScreen(Screen,EventKey):
         self.isOpening = False
         Screen.__init__(self,**kwargs)
         EventKey.__init__(self)
-        self.EventsList = [EventsLootBox("btc","src/data/img/btc.png"),EventsLootBox("eth","src/data/img/eth.png"),EventsLootBox("sol","src/data/img/sol.png"),EventsLootBox("xmr","src/data/img/xmr.png")]
+        currentPath = "src/data/img/"
+        self.EventsList = [
+            EventsLootBox("btc",currentPath + "btc.png","btc","crypto"),
+            EventsLootBox("eth",currentPath +"eth.png","eth","crypto"),
+            EventsLootBox("sol",currentPath +"sol.png","sol","crypto"),
+            EventsLootBox("xmr",currentPath +"xmr.png","xmr","crypto"),
+            EventsLootBox("usb killer", currentPath +"usb-killer.png","fries you oponent pc with hight voltage\ndeals 10hp","obj"),
+            EventsLootBox("antivirus", currentPath +"heal.png", "la base virale vps a été mise a jours\ngives 20hp","obj"),
+            EventsLootBox("gatorade", currentPath + "gatorade.png", "add your level times 5 to your damage of the next attack","obj"),
+            EventsLootBox("usb stick",currentPath + "usb-attach.png","make you learn one random attack","obj"),
+            EventsLootBox("no connection", currentPath + "no-internet.jpg", "skips a combat single use only and not usable on bosses","obj"),
+            EventsLootBox("rtx3090", currentPath + "rtx3090.png", "augment your hashing power double your damage for the next turn","obj")
+            ]
         
 
     def on_enter(self):
@@ -25,6 +37,12 @@ class BoxScreen(Screen,EventKey):
             self.carousel.add_widget(image)
         self.ids.CarouselGrid.add_widget(self.carousel)
         
+    def on_leave(self):
+        self.isOpening = False
+        self.i = 0
+        self.ids.LootboxBtn.text = 'Open Lootbox'
+        self.ids.LootboxBtn.on_release = self.open_box
+
     def displayLoot(self,loot):
         self.ids.LootboxBtn.text = "you won : \n" + str(loot)
         self.ids.LootboxBtn.on_release= lambda : self.manager.Switch("game")
@@ -41,7 +59,6 @@ class BoxScreen(Screen,EventKey):
             self.carousel.load_slide(self.carousel.slides[self.EventsList.index(ev)])
             self.event.cancel()
             ev.active(self.manager.currentGame.Player)
-            sleep(1)
             self.displayLoot(ev.Name)
         else:
             self.carousel.load_next()
@@ -56,11 +73,15 @@ class BoxScreen(Screen,EventKey):
 
 class EventsLootBox:
 
-    def __init__(self,Name,img,effect=print):
+    def __init__(self,Name,img,desc,typ):
         self.Name = Name
         self.img = img
-        self._effect = effect
+        self.desc = desc
+        self.type = typ
 
     def active(self, player):
-        self._effect(player)
+        if self.type == "crypto":
+            wallet =  player.wallet
+            wallet.add(self.Name,GetPrice(self.Name)) 
+            
     

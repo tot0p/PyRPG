@@ -16,11 +16,16 @@ class BattleScreen(Screen,EventKey):
         self.BattleMenu("")
 
         return Screen.on_enter(self)
+
+    def on_leave(self):
+        self.ids.ActionDisplayPlayer.text = "Player Action :"
+        self.ids.ActionDisplayEnemy.text = "Enemy Action :"
+        return Screen.on_leave(self)
         
     def Attack(self,args):
         self.ids.BattleButtons.clear_widgets()
         for i in self.Player.GetAtt():
-            self.ids.BattleButtons.add_widget(Button(text=i,on_release=lambda x : self.Player.attack(i,self.Enemy,lambda : self.Enemy.attack(self.Enemy.randomAtt().name, self.Player,lambda : self.BattleMenu("")))))
+            self.ids.BattleButtons.add_widget(Button(text=i.name,on_release=lambda x : self.Player.attack(x.text,self.Enemy,lambda : self.Enemy.attack(self.Enemy.randomAtt().name, self.Player,lambda : self.BattleMenu("")))))
     
     def Items(self,args):
         self.ids.BattleButtons.clear_widgets()
@@ -35,10 +40,15 @@ class BattleScreen(Screen,EventKey):
         self.BattleMenu("")
 
     def BattleMenu(self,args):
-        if self.Enemy.hp <=0:
-            self.manager.Switch("game")
         if self.Player.hp <=0:
             self.manager.Switch("gameover")
+            return
+        elif self.Enemy.hp <=0:
+            if self.Player.levelUp(self.Enemy.xpReward):
+                self.manager.Switch("levelup")
+            else:
+                self.manager.Switch("box")
+            return
         if self.Player.resultOfLastAtt != None:
             self.ids.ActionDisplayPlayer.text = "Player Action :"+"\n"+self.Player.resultOfLastAtt
         if self.Enemy.resultOfLastAtt != None :
