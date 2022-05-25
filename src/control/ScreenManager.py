@@ -66,7 +66,7 @@ class Manager(ScreenManager):
     def Reset(self):
         self.screens = self.screens[-3:]
         self.currentGame = GameScreen(name="game")
-        # self.add_widget(SettingsScreen(name="settings"))
+        self.add_widget(HelpScreen(name="help"))
         self.add_widget(NewGameScreen(name="newgame"))
         self.currentWallet = CryptoScreen(name="wallet")
         self.add_widget(self.currentWallet)
@@ -79,6 +79,7 @@ class Manager(ScreenManager):
         #eventGame
         self.currentLevelUp = LevelUpScreen(name="levelup")
         self.add_widget(self.currentLevelUp)
+        self.add_widget(MarchandScreen(name="marchand"))
         self.add_widget(BoxScreen(name="box"))
         self.add_widget(BattleScreen(name="bataille"))
 

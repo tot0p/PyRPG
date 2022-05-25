@@ -1,7 +1,7 @@
 [    
     {
         "name": "bruteforce",
-        "damage": 100,
+        "damage": 5,
         "reusite": 80,
         "missMessage": "your pc overheated",
         "succesMessage": "you have cracked his password"

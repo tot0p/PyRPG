@@ -60,8 +60,7 @@ class BoxScreen(Screen,EventKey):
 
     def playAnymeLoot(self,inter):
         if self.i > 20 :
-            # ev = choice(self.EventsList)
-            ev = self.EventsList[6]
+            ev = choice(self.EventsList)
             self.carousel.load_slide(self.carousel.slides[self.EventsList.index(ev)])
             self.event.cancel()
             ev.active(self.manager.currentGame.Player,self)

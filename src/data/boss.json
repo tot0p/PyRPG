@@ -1,0 +1,46 @@
+[
+    {
+        "name":"looking for a member of anonimus",
+        "enn":{
+            "name":"member of anonimus",
+            "hp":150,
+            "att":[{
+                "name": "netcat",
+                "damage": 10,
+                "reusite": 50,
+                "missMessage": "Miaouh",
+                "succesMessage": "your proxy is so bad"
+            },
+            {
+                "name": "wireshark",
+                "damage": 15,
+                "reusite": 45,
+                "missMessage": "oh no , i'm saw Jaws for to long",
+                "succesMessage": "My teeth are so sharp"
+            }
+            ]
+        }
+    },
+    {
+        "name":"looking for a member of anonimus",
+        "enn":{
+            "name":"member of anonimus",
+            "hp":150,
+            "att":[{
+                "name": "netcat",
+                "damage": 10,
+                "reusite": 50,
+                "missMessage": "Miaouh",
+                "succesMessage": "your proxy is so bad"
+            },
+            {
+                "name": "wireshark",
+                "damage": 15,
+                "reusite": 45,
+                "missMessage": "oh no , i'm saw Jaws for to long",
+                "succesMessage": "My teeth are so sharp"
+            }
+            ]
+        }
+    }
+]

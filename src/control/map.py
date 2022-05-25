@@ -10,12 +10,12 @@ class Quete:
         self.currentQuete = debut
 
     def generateMap(self,seed):
-        return [(0,0,-1)]
+        return [(0,0,0)]
 
 class Map:
     def __init__(self,seed,nmax=20) -> None:
-        self.width = 100
-        self.height = 100
+        self.width = 20
+        self.height = 20
         self.quest = []
         self._seed = seed
         self.tiles = self.__generate_map()

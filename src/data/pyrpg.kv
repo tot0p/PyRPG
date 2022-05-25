@@ -271,8 +271,8 @@
                 text:"resume"
                 on_release : root.manager.Switch("game")
             Button:
-                text:"options"
-                on_release : print("option")
+                text:"Help"
+                on_release : root.manager.Switch("help")
             Button:
                 text:"Quit"
                 on_release: root.manager.Reset()

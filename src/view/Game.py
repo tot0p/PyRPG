@@ -13,6 +13,7 @@ class  GameScreen(Screen,EventKey):
         self.Player = ""
         self.Map = ""
         self.event = None
+        self.MonsterFight = 0
         self.eventGameManager = EventGameManager(pathEventsFile)
         self.textInput = self.ids.rootTextInput
         self.historyInput = self.ids.previousactions

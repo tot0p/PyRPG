@@ -2,7 +2,9 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from src.control.eventKey import EventKey
-from src.control.entities.enemy import Enemy
+from src.control.entities.enemy import Enemy , LoadEnemy
+from src.control.entities.att import GetAllAtt
+from random import choice
 
 class BattleScreen(Screen,EventKey):
     def __init__(self,**kwargs) -> None:
@@ -10,14 +12,28 @@ class BattleScreen(Screen,EventKey):
         EventKey.__init__(self)
 
 
+    def createEnemy(self):
+        temp = self.manager.currentGame.MonsterFight
+        if temp < 3:
+            self.Enemy = LoadEnemy(temp)
+        else:
+            r = GetAllAtt()
+            att = [choice(r),choice(r),choice(r),choice(r)]
+            for i in att:
+                i.damage += self.manager.currentGame.MonsterFight
+            self.Enemy = Enemy("Strong Hackerman", 150, att)
+        self.manager.currentGame.MonsterFight +=1
+
     def on_enter(self):
-        self.Enemy = Enemy("luca")
+        self.createEnemy()
         self.Player = self.manager.currentGame.Player
         self.BattleMenu("")
 
         return Screen.on_enter(self)
 
     def on_leave(self):
+        self.Player.resultOfLastAtt = None
+        self.Enemy.resultOfLastAtt = None
         self.ids.ActionDisplayPlayer.text = "Player Action :"
         self.ids.ActionDisplayEnemy.text = "Enemy Action :"
         return Screen.on_leave(self)
