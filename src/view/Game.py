@@ -1,9 +1,10 @@
 from kivy.uix.screenmanager import  Screen
-from src.control.jsonfile import ReadJson,WriteJson
+from src.control.jsonfile import ReadJson1Prof,WriteJson
 from src.control.eventKey import EventKey
 from src.control.eventGameManager import EventGameManager,EventGameManagerEncoder
 from src.control.entities.Player import PlayerEncoder
 from src.control.map import MapEncoder
+import jsonpickle
 import json
 from json import JSONEncoder
 
@@ -34,18 +35,27 @@ class  GameScreen(Screen,EventKey):
         self.SaveGame()
     
     def SaveGame(self):
-        PlayerData = json.dumps(self.Player,cls=PlayerEncoder)
-        MapData = json.dumps(self.Map,cls=MapEncoder)
-        EventGameManagerData = json.dumps(self.eventGameManager,cls=EventGameManagerEncoder)
         GameData = {
-            "Player":PlayerData,
-            "Map":MapData,
-            "eventGameManager":EventGameManagerData,
+            "Player":jsonpickle.encode(self.Player),
+            "Map":jsonpickle.encode(self.Map),
+            "eventGameManager":jsonpickle.encode(self.eventGameManager),
             "event":self.event,
             "eventPast":self.eventPast,
             "MonsterFight":self.MonsterFight,
         }
         WriteJson("src/data/save.json",GameData)
+    
+    def LoadGame(self):
+        t = ReadJson1Prof("src/data/save.json")
+        print(type(t["Player"]))
+        self.event = t["event"]
+        self.eventPast = t["eventPast"]
+        self.MonsterFight = t["MonsterFight"]
+        self.Player = jsonpickle.decode(t["Player"])
+        self.Map = jsonpickle.decode(t["Map"])
+        self.eventGameManager = jsonpickle.decode(t["eventGameManager"])
+        self.manager.Switch("game")
+        
 
         
         

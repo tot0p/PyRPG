@@ -21,7 +21,7 @@ class MenuScreen(Screen, EventKey):
         Screen.__init__(self, **kwargs)
         EventKey.__init__(self)
         self.options = {
-            "Load Game": lambda: print("Load Game"),
+            "Load Game": lambda: self.manager.currentGame.LoadGame(),
             "New Game": lambda: self.manager.Switch("newgame"),
             "Help": lambda: self.manager.Switch("help"),
             "Quit": lambda: exit(0),

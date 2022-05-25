@@ -6,6 +6,11 @@ def WriteJson(path: str, cont: dict):
         json.dump(cont, f)
 
 
+def ReadJson1Prof(path: str):
+    with open(path) as f:
+        data = json.load(f)
+    return data
+
 def ReadJson(path: str):
     with open(path) as f:
         data = json.loads(f.read())
