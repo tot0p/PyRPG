@@ -204,7 +204,7 @@
             Button:
                 text:'wallet'
                 size_hint: .2, .4
-                on_release: root.manager.Switch("wallet")
+                on_release: root.manager.SwitchWallet()
             Button:
                 text:'save and exit'
                 on_release: exit(0)
@@ -216,6 +216,29 @@
     GridLayout:
         id:Stats
         cols: 1
+
+<MarchandScreen>
+    GridLayout:
+        cols:1
+        GridLayout:
+            cols:2
+            Label:
+                text:"BUY"
+            Label:
+                text:"SELL"
+            GridLayout:
+                id:BuyGrid
+                cols:2
+            GridLayout:
+                id:SellGrid
+                cols:2
+            Button:
+                text:'Go back to game'
+                on_release: root.manager.exit()
+            Button:
+                text:'Crypto wallet'
+                on_release: root.manager.SwitchWallet("marchand")
+
 
 <LevelUpScreen>:
     GridLayout:

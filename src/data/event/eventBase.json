@@ -1,14 +1,14 @@
 {
     "0":{
         "type":"",
-        "hist":"Il n'y a rien ici",
+        "hist":"there is nothing to see here",
         "rep":["ok"],
         "histfin": ""
     },
     "1":{
         "type":"marchand",
-        "hist":"salut c moi tchoupi je marche vers l'école j'ai de nouveau amis tous ensemble on rigole",
-        "rep":[],
+        "hist":"hello good man do you want to buy my items ?",
+        "rep":["ok"],
         "histfin": ""
     },
     "2":{

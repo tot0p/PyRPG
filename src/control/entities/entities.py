@@ -42,9 +42,6 @@ class entities:
             on peut que assigner avec un tuple
 
         '''
-        print("setter att")
-        print(v[1].name)
-        print(v[0])
         assert isinstance(v,tuple) ; "la valeur n'est pas un tuple"
         assert len(v)==2 ; "il n'y a pas le nombre de valeur demandé dans la valeur"
         assert isinstance(v[0],int) ; "v[0] n'est pas un int"

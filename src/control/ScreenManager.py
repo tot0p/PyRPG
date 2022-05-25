@@ -14,6 +14,7 @@ from src.view.GameOver import GameOverScreen
 from src.view.Inventory import InventoryScreen
 from src.view.Stats import StatsScreen
 from src.view.LevelUp import LevelUpScreen
+from src.view.Marchand import MarchandScreen
 
 
 
@@ -26,7 +27,8 @@ class Manager(ScreenManager):
         self.currentGame = GameScreen(name="game")
         # self.add_widget(SettingsScreen(name="settings"))
         self.add_widget(NewGameScreen(name="newgame"))
-        self.add_widget(CryptoScreen(name="wallet"))
+        self.currentWallet = CryptoScreen(name="wallet")
+        self.add_widget(self.currentWallet)
         self.add_widget(MapScreen(name="map"))
         self.add_widget(QuestListScreen(name="quest"))
         self.add_widget(InventoryScreen(name="inventory"))
@@ -34,7 +36,9 @@ class Manager(ScreenManager):
         self.add_widget(self.currentGame)
 
         #eventGame
-        self.add_widget(LevelUpScreen(name="levelup"))
+        self.currentLevelUp = LevelUpScreen(name="levelup")
+        self.add_widget(self.currentLevelUp)
+        self.add_widget(MarchandScreen(name="marchand"))
         self.add_widget(BoxScreen(name="box"))
         self.add_widget(BattleScreen(name="bataille"))
 
@@ -50,13 +54,22 @@ class Manager(ScreenManager):
 
     def Switch(self,id):
         self.current = id
+    
+    def SwitchAtt(self,lootbox = True):
+        self.Switch("levelup")
+        self.currentLevelUp.openBox = lootbox
+
+    def SwitchWallet(self,to="game"):
+        self.Switch("wallet")
+        self.currentWallet.to=to
 
     def Reset(self):
         self.screens = self.screens[-3:]
         self.currentGame = GameScreen(name="game")
         # self.add_widget(SettingsScreen(name="settings"))
         self.add_widget(NewGameScreen(name="newgame"))
-        self.add_widget(CryptoScreen(name="wallet"))
+        self.currentWallet = CryptoScreen(name="wallet")
+        self.add_widget(self.currentWallet)
         self.add_widget(MapScreen(name="map"))
         self.add_widget(QuestListScreen(name="quest"))
         self.add_widget(InventoryScreen(name="inventory"))
@@ -64,7 +77,8 @@ class Manager(ScreenManager):
         self.add_widget(self.currentGame)
 
         #eventGame
-        self.add_widget(LevelUpScreen(name="levelup"))
+        self.currentLevelUp = LevelUpScreen(name="levelup")
+        self.add_widget(self.currentLevelUp)
         self.add_widget(BoxScreen(name="box"))
         self.add_widget(BattleScreen(name="bataille"))
 

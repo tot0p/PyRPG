@@ -9,7 +9,7 @@ class attack:
         self.succesMessage = succesMessage
 
     def __str__(self) -> str:
-        return self.name 
+        return self.name + " damage: " + str(self.damage)
 
     def attack(self,attacker,reciver) -> str:
         k = randint(0, 100)

@@ -13,6 +13,12 @@ class Items:
     def __iadd__(self,o):
         if type(o) == int and self.durability >= 0:
             self.durability += o
+        return self
+
+    def __isub__(self,o):
+        if type(o) == int and self.durability >= 0:
+            self.durability -= o
+        return self
 
     def use(self,launcher,target,callback=print):
         if self.nbuse < self.durability or self.durability == -1:
@@ -28,32 +34,30 @@ class Items:
 
 
 class HealtPotions(Items):
-    def __init__(self, name, desc, durability , hpGiven = 10):
+    def __init__(self, name, desc, durability , hpGiven = 20,cost=0):
         self.hpGiven = hpGiven
-        super().__init__(name, self.Healt, desc, durability,"use potion of healt")
+        super().__init__(name, self.Healt, desc, durability,"use potion of healt",cost)
 
 
     def Healt(self,launcher,target):
-        if launcher.hpMax - launcher.hp > 10 :
+        if launcher.hpMax - launcher.hp > self.hpGiven :
             launcher.hp += self.hpGiven
         else:
             launcher.hp = launcher.hpMax
 
 class DammagePotions(Items):
-    def __init__(self, name,desc, durability,dammage=10):
+    def __init__(self, name,desc, durability,dammage=10,cost=0):
         self.dammage = dammage
-        super().__init__(name, self.Dammage, desc, durability,"use potion of Dammage")
+        super().__init__(name, self.Dammage, desc, durability,"use potion of Dammage",cost)
 
     def Dammage(self,launcher,target):
         target.hp -= self.dammage
 
 
 
-
 class SkipCombat(Items):
-    def __init__(self, name,desc, durability,skip=True):
-        self.skip = skip
-        super().__init__(name, self.Skip, desc, durability,"skipped combat")
+    def __init__(self, name,desc, durability,cost=0):
+        super().__init__(name, self.Skip, desc, durability,"skipped combat",cost)
 
     def Skip(self,launcher,target):
         target.hp=0

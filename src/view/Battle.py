@@ -33,7 +33,7 @@ class BattleScreen(Screen,EventKey):
             self.ids.BattleButtons.add_widget(Button(text="You have no items in your inventory",on_release=lambda x: self.BattleMenu("")))
         else:
             for i in self.Player.inv:
-                self.ids.BattleButtons.add_widget(Button(text=i.name+"\nUse Left : "+i.GetNumberUse(),on_release=lambda x :i.use(self.Player,self.Enemy,lambda : self.Enemy.attack(self.Enemy.randomAtt().name, self.Player,lambda : self.displayItemMessage(i)))))
+                self.ids.BattleButtons.add_widget(Button(text=i.name+"\nUse Left : "+i.GetNumberUse(),on_release=lambda x : self.Player.GetObjByName(x.text.split("\n")[0]).use(self.Player,self.Enemy,lambda : self.Enemy.attack(self.Enemy.randomAtt().name, self.Player,lambda : self.displayItemMessage(self.Player.GetObjByName(x.text.split("\n")[0]))))))
         
     def displayItemMessage(self,item):
         self.Player.resultOfLastAtt = item.messageAction 
@@ -45,7 +45,7 @@ class BattleScreen(Screen,EventKey):
             return
         elif self.Enemy.hp <=0:
             if self.Player.levelUp(self.Enemy.xpReward):
-                self.manager.Switch("levelup")
+                self.manager.SwitchAtt()
             else:
                 self.manager.Switch("box")
             return

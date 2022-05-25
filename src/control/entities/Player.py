@@ -14,9 +14,11 @@ class Player(entities):
         self.level = 1
         self.wallet =Wallet()
         self._inv = [
-            HealtPotions("Antivirus", "la base virale vps a été mise a jours\ngives 20hp", 1),
-            DammagePotions("usb killer","fries you oponent pc with hight voltage\ndeals 10hp",1),
-            SkipCombat("no connection", "skips a combat single use only and not usable on bosses", 0),
+            HealtPotions("antivirus", "la base virale vps a été mise a jours\ngives 20hp", 1,20,50),
+            HealtPotions("virus protection plan", "cleaning viruses away\ngives 50hp", 0,50,250),
+            DammagePotions("usb killer","fries you oponent pc with hight voltage\ndeals 10hp",1,10,100),
+            DammagePotions("bad overclocking", "set you opponent pc in flames\ndeals 50hp", 0,50,1000),
+            SkipCombat("no connection", "skips a combat single use only and not usable on bosses", 0,2500),
             ]
 
     def levelUp(self,xpReward):
@@ -27,6 +29,26 @@ class Player(entities):
             self.level +=1
             return True
         return False
+
+    def AddObjByName(self,name,q=1):
+        for i in self._inv:
+            if i.name == name:
+                i += q
+
+    def DeleteItemByName(self,name):
+        for i in self._inv:
+            if i.name == name:
+                i -= 1
+                return i.cost
+            
+    def GetObjByName(self,name):
+        try:
+            return [i for i in self._inv if i.name == name][0]
+        except:
+            return None
+
+    def GetAllInvNameAndPrice(self):
+        return  [(i.name,i.cost) for i in self._inv]
 
     @property
     def inv(self):
@@ -61,7 +83,9 @@ class Wallet:
         return getattr(self,s)
 
     def rm(self,s,n):
-        setattr(self,s,getattr(self,s)-n)
+        if n>0:
+            setattr(self,s,getattr(self,s)-n)
 
     def add(self,s,n):
-        setattr(self,s,getattr(self,s)+n)
+        if n>0:
+            setattr(self,s,getattr(self,s)+n)

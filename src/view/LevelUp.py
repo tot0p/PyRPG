@@ -10,13 +10,14 @@ class LevelUpScreen(Screen,EventKey):
     def __init__(self, **kwargs) -> None:
         Screen.__init__(self,**kwargs)
         EventKey.__init__(self)
+        self.openBox = True
         self.randomAttackList = []
 
     def on_enter(self, *args):
         self.ids.LevelUpGrid.add_widget(Label(text="choose wich attack you want to learn"))
         self.randomAttackList = Get4RandomAtt(self.manager.currentGame.Player)
         for i in self.randomAttackList:
-            self.ids.LevelUpGrid.add_widget(Button(text=i.name,on_release= self.selectAttack))
+            self.ids.LevelUpGrid.add_widget(Button(text=i.name+"\nDamage :"+str(i.damage),on_release= self.selectAttack))
         
     def __GetAttByName(self,name):
         try :
@@ -30,9 +31,9 @@ class LevelUpScreen(Screen,EventKey):
         if len(allAttPlayer) == 4:
             self.ids.LevelUpGrid.add_widget(Label(text="choose wich attack to replace"))
             for id,i in enumerate (allAttPlayer):
-                self.ids.LevelUpGrid.add_widget(Button(text=str(id+1) +" - "+i.name,on_release=lambda x :self.replaceAttack(int(x.text.split(" - ")[0])-1, self.__GetAttByName(button.text), self.attackChoice)))
+                self.ids.LevelUpGrid.add_widget(Button(text=str(id+1) +" - "+i.name+"\nDamage :"+str(i.damage),on_release=lambda x :self.replaceAttack(int(x.text.split(" - ")[0])-1, self.__GetAttByName(button.text.split("\n")[0]), self.attackChoice)))
         else:
-            self.replaceAttack(len(allAttPlayer),self.__GetAttByName(button.text), self.attackChoice)
+            self.replaceAttack(len(allAttPlayer),self.__GetAttByName(button.text.split("\n")[0]), self.attackChoice)
     
     def replaceAttack(self, id,attack,callback):
         self.manager.currentGame.Player.att = (id,attack)
@@ -43,6 +44,9 @@ class LevelUpScreen(Screen,EventKey):
     
     def attackChoice(self):
         self.ids.LevelUpGrid.clear_widgets()
-        self.ids.LevelUpGrid.add_widget(Button(text="go to open your lootbox",on_release=lambda x : self.manager.Switch("box")))
+        if self.openBox:
+            self.ids.LevelUpGrid.add_widget(Button(text="go to open your lootbox",on_release=lambda x : self.manager.Switch("box")))
+        else:
+            self.manager.Switch("game")
     
     

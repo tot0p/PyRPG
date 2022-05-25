@@ -7,7 +7,7 @@ from kivy.uix.gridlayout import GridLayout
     
 class MapScreen(Screen,EventKey):
     def __init__(self, **kwargs) -> None:
-        self.mapIco= {"0":"⬛","2":"🎁","3":"💥"}
+        self.mapIco= {"0":"⬛","1":"👤","2":"🎁","3":"💥"}
 
         Screen.__init__(self,**kwargs)
         EventKey.__init__(self)
