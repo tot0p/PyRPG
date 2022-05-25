@@ -1,7 +1,11 @@
 from kivy.uix.screenmanager import  Screen
 from src.control.jsonfile import ReadJson,WriteJson
 from src.control.eventKey import EventKey
-from src.control.eventGameManager import EventGameManager
+from src.control.eventGameManager import EventGameManager,EventGameManagerEncoder
+from src.control.entities.Player import PlayerEncoder
+from src.control.map import MapEncoder
+import json
+from json import JSONEncoder
 
 
 
@@ -27,6 +31,23 @@ class  GameScreen(Screen,EventKey):
     def LaunchGame(self,Player,Map):
         self.Player = Player
         self.Map = Map
+        self.SaveGame()
+    
+    def SaveGame(self):
+        PlayerData = json.dumps(self.Player,cls=PlayerEncoder)
+        MapData = json.dumps(self.Map,cls=MapEncoder)
+        EventGameManagerData = json.dumps(self.eventGameManager,cls=EventGameManagerEncoder)
+        GameData = {
+            "Player":PlayerData,
+            "Map":MapData,
+            "eventGameManager":EventGameManagerData,
+            "event":self.event,
+            "eventPast":self.eventPast,
+            "MonsterFight":self.MonsterFight,
+        }
+        WriteJson("src/data/save.json",GameData)
+
+        
         
 
     def on_enter(self, *args):
@@ -80,6 +101,3 @@ class  GameScreen(Screen,EventKey):
     def key_action(self,keybord,keycode,_,keyName,textContent):
         if keycode == 27:
             self.manager.Switch("pause")
-
-
-            

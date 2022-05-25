@@ -3,7 +3,7 @@ from src.control.jsonfile import ReadJson
 from src.control.entities.att import attack
 from src.control.Items import  HealtPotions , DammagePotions , SkipCombat
 from src.view.Crypto import GetPrice
-
+from json import JSONEncoder
 
 
 class Player(entities):
@@ -90,3 +90,8 @@ class Wallet:
     def add(self,s,n):
         if n>0:
             setattr(self,s,getattr(self,s)+n)
+
+
+class PlayerEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__

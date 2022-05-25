@@ -1,6 +1,7 @@
 import random
 import math
 import src.control.jsonfile as json
+from json import JSONEncoder
 
 
 class Quete:
@@ -31,7 +32,6 @@ class Map:
         self._seed = seed
         self.tiles = self.__generate_map()
         g = self.quest[0].generate()
-        print(g)
         self.tiles[g[0]][g[1]] = -1
 
     
@@ -86,3 +86,8 @@ class Map:
 
 
         return [[rangeRand[random.randint(0,99)] for _ in range(self.width) ] for _ in range(self.height) ]
+
+
+class MapEncoder(JSONEncoder):
+    def default(self,o):
+        return o.__dict__

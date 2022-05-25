@@ -1,4 +1,6 @@
 from src.control.jsonfile import ReadJson , json
+from json import JSONEncoder
+
 
 class Event:
     def __init__(self,type="",hist="",rep="",histfin="",**args):
@@ -41,8 +43,9 @@ class EventGameManager:
             self.currentId = id
         return self.all_events[id].type == ""
 
-
-    
+class EventGameManagerEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
 
 # if __name__ == "__main__":
 #     eventMan = EventGameManager("../data/event/eventBase.json")
