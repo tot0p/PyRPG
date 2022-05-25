@@ -14,7 +14,6 @@ class entities:
         self.hp = hp
         self.hpMax = hp
         self._att = att
-        self.status = []
         self.resultOfLastAtt = None
 
 

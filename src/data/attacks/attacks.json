@@ -3,7 +3,6 @@
         "name": "bruteforce",
         "damage": 100,
         "reusite": 80,
-        "effects":[],
         "missMessage": "your pc overheated",
         "succesMessage": "you have cracked his password"
     },
@@ -11,7 +10,6 @@
         "name": "DDOS",
         "damage": 15,
         "reusite": 60,
-        "effects":[],
         "missMessage": "your botnet is not responding",
         "succesMessage": "he is down"
     },
@@ -19,7 +17,6 @@
         "name": "phishing",
         "damage": 10,
         "reusite": 70,
-        "effects":[],
         "missMessage": "you catched a fish but not the one you wanted",
         "succesMessage": "the email worked !!"
     },
@@ -27,7 +24,6 @@
         "name": "SQL-injection",
         "damage": 20,
         "reusite": 40,
-        "effects":[],
         "missMessage": "the admin blocked you",
         "succesMessage": "you cracked the database"
     },
@@ -35,7 +31,6 @@
         "name": "port-listening",
         "damage": 10,
         "reusite": 75,
-        "effects":[],
         "missMessage": "your ip has been blocked",
         "succesMessage": "you got in the system"
     },
@@ -43,7 +38,6 @@
         "name": "trojan",
         "damage": 40,
         "reusite": 30,
-        "effects":[],
         "missMessage": "the computer didn't let the horse in",
         "succesMessage": "he has no idea your in"
     },
@@ -51,7 +45,6 @@
         "name": "ransomware",
         "damage": 60,
         "reusite": 20,
-        "effects":[],
         "missMessage": "you were to weak for the antivirus",
         "succesMessage": "give me thoes bitcoins"
     },
@@ -59,7 +52,6 @@
         "name": "total-overload",
         "damage": 100,
         "reusite": 5,
-        "effects":[],
         "missMessage": "your mom disconnected the internet",
         "succesMessage": "total destruction complete"
     }
