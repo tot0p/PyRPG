@@ -13,10 +13,14 @@
             id: gridMenu
             cols: 2
 
-<SettingsScreen>:
-    Button:
-        text: 'Hello again'
-        on_release: root.manager.current = 'menu'
+<HelpScreen>:
+    GridLayout:
+        cols:1
+        Label:
+            text:'this is how the game works'
+        Button:
+            text: 'Go back to menu'
+            on_release: root.manager.current = 'menu'
 
 
 <NewGameScreen>:

@@ -19,7 +19,7 @@ class MenuScreen(Screen,EventKey):
     def __init__(self,**kwargs) -> None:
         Screen.__init__(self,**kwargs)
         EventKey.__init__(self)
-        self.options = {"Load Game":lambda  : print("Load Game"),"New Game":lambda : self.manager.Switch("newgame"),"Options":lambda :print("Options"),"Quit":lambda : exit(0)}
+        self.options = {"Load Game":lambda  : print("Load Game"),"New Game":lambda : self.manager.Switch("newgame"),"Help":lambda :print("help"),"Quit":lambda : exit(0)}
         t = []
         for key in self.options:
             t.append(key)

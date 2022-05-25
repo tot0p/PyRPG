@@ -21,6 +21,8 @@ class  NewGameScreen(Screen,EventKey):
         return super().on_enter(*args)
     
     def key_action(self, keybord, keycode, _, keyName, textContent):
+        if keycode == 27:
+            self.manager.Switch("menu")
         if keycode == 13:
             self.__createGame()
         return super().key_action(keybord, keycode, _, keyName, textContent)
