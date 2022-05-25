@@ -221,7 +221,7 @@
         id:Stats
         cols: 1
 
-<MarchandScreen>
+<MarchandScreen>:
     GridLayout:
         cols:1
         GridLayout:
@@ -238,7 +238,7 @@
                 cols:2
             Button:
                 text:'Go back to game'
-                on_release: root.manager.exit()
+                on_release: root.exit()
             Button:
                 text:'Crypto wallet'
                 on_release: root.manager.SwitchWallet("marchand")
@@ -296,14 +296,16 @@
     GridLayout:
         id:BattleGrid
         cols:3
-        Label:
-            id:PlayerImage
-            text:"this is the player image"
+        Image:
+            source: './src/data/img/player.gif'
+            size: 500, 500
+            allow_stretch: True
         Label:
             text:""
-        Label:
-            id:EnemyImage
-            text:"this is the enemy image"
+        Image:
+            source: './src/data/img/enemy.gif'
+            size: 500, 500
+            allow_stretch: True
         Label:
             id:PlayerHp
             text:"this is the player hp"
