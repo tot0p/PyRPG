@@ -211,7 +211,7 @@
                 on_release: root.manager.SwitchWallet()
             Button:
                 text:'save and exit'
-                on_release: lambda : root.manager.currentGame.SaveGame(); root.manager.Reset()
+                on_release: root.SaveGame()
                 size_hint: .2, .4
             Label:
                 text:''

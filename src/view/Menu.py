@@ -31,3 +31,6 @@ class MenuScreen(Screen, EventKey):
             t.append(key)
             button = MenuButton(self.options[key], text=str(len(t)) + ". " + key)
             self.ids.gridMenu.add_widget(button)
+
+    def on_enter(self):
+        self.manager.Reset()

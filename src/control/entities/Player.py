@@ -22,6 +22,7 @@ class Player(entities):
             SkipCombat("no connection", "skips a combat single use only and not usable on bosses", 2,2500),
             ]
 
+
     def levelUp(self,xpReward):
         assert xpReward > 0 ; "xpReward can't < 0"
         self.xp += xpReward
@@ -80,6 +81,9 @@ class Wallet:
         self.btc =  GetPrice("btc")
         self.xmr =  GetPrice("xmr")
 
+    def Save(self):
+        return "{"+ f"\"eur\":{self.eur},\"eth\":{self.eth},\"sol\":{self.sol},\"btc\":{self.btc},\"xmr\":{self.xmr}" + "}"
+
     def get(self,s):
         return getattr(self,s)
 
@@ -90,8 +94,3 @@ class Wallet:
     def add(self,s,n):
         if n>0:
             setattr(self,s,getattr(self,s)+n)
-
-
-class PlayerEncoder(JSONEncoder):
-    def default(self, o):
-        return o.__dict__

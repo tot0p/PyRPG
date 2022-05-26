@@ -9,13 +9,12 @@ from random import choice
 #Entities
 class entities:
 
-    def __init__(self,name,hp=100,att=[attack("Luca",10,50),attack("karim"),attack("albert"),attack("smabre")]) -> None:
+    def __init__(self,name,hp=100,att=[None,None,None,None]) -> None:
         self.name = name
         self.hp = hp
         self.hpMax = hp
         self._att = att
         self.resultOfLastAtt = None
-
 
     def GetAtt(self):
         return [i for i in self._att if i!=None ]

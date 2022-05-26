@@ -17,8 +17,8 @@ class Quete:
         return self.listquete[self.id]["name"]
 
     def generate(self):
-        return (1,1)
-        # return (random.randint(0, 20),random.randint(0, 20))
+        # return (1,1)
+        return (random.randint(0, 19),random.randint(0, 19))
 
     def Next(self):
         self.id += 1
@@ -33,7 +33,6 @@ class Map:
         self.tiles = self.__generate_map()
         g = self.quest[0].generate()
         self.tiles[g[0]][g[1]] = -1
-
     
     def NextQuest(self,id=0):
         t = self.quest[id].Next()
@@ -87,7 +86,3 @@ class Map:
 
         return [[rangeRand[random.randint(0,99)] for _ in range(self.width) ] for _ in range(self.height) ]
 
-
-class MapEncoder(JSONEncoder):
-    def default(self,o):
-        return o.__dict__

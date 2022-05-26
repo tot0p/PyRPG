@@ -56,6 +56,7 @@ class Manager(ScreenManager):
 
     def Switch(self,id):
         self.current = id
+
     
     def SwitchAtt(self,lootbox = True):
         self.Switch("levelup")
