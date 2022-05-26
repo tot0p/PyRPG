@@ -1,7 +1,8 @@
 
 # RPG
 
-Le repo du RPG
+RPG is a RPG game coding in [python](https://www.python.org/downloads/release/python-3913/) with [kivy](https://kivy.org/#home), [yfinance](https://pypi.org/project/yfinance/) and [jsonpickle](https://pypi.org/project/jsonpickle/)
+During 1 month , we have coding this game for the scool
 
 
 ## Installation
