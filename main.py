@@ -9,6 +9,11 @@ from src.control.ScreenManager import Manager
 from src.control.eventKey import EventKeyManager
 
 
+__author__  = "Thomas Lemaitre , Luca Morgado"
+__status__  = "release"
+__version__ = "1.0"
+__date__    = "26 may 2022"
+
 class PyRPGApp(App):
     kv_directory = "src/data"
 
