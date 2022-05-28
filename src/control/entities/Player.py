@@ -17,9 +17,9 @@ class Player(entities):
         self._inv = [
             HealtPotions("antivirus", "la base virale vps a été mise a jours\ngives 20hp", 1,20,50),
             HealtPotions("virus protection plan", "cleaning viruses away\ngives 50hp", 0,50,250),
-            DammagePotions("usb killer","fries you oponent pc with hight voltage\ndeals 10hp",1,10,100),
+            DammagePotions("usb killer","fries you oponent pc with hight voltage\ndeals 10hp",1,20,100),
             DammagePotions("bad overclocking", "set you opponent pc in flames\ndeals 50hp", 0,50,1000),
-            SkipCombat("no connection", "skips a combat single use only and not usable on bosses", 2,2500),
+            SkipCombat("no connection", "skips a combat single use only and not usable on bosses", 1,2500),
             ]
 
 

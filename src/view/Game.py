@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import  Screen
 from src.control.jsonfile import ReadJson1Prof,WriteJson,ExistFile
 from src.control.eventKey import EventKey
 from src.control.eventGameManager import EventGameManager
+from kivy.clock import Clock
 import jsonpickle
 import json
 
@@ -25,6 +26,7 @@ class  GameScreen(Screen,EventKey):
         self.rep = self.ids.textaction
         self.textInput.bind(on_text_validate=self.on_enter_textInput)
         self.posDep = []
+        self.reload = False
 
     def LaunchGame(self,Player,Map):
         self.Player = Player
@@ -51,6 +53,7 @@ class  GameScreen(Screen,EventKey):
             self.Player = jsonpickle.decode(t["Player"])
             self.Map = jsonpickle.decode(t["Map"])
             self.eventGameManager = jsonpickle.decode(t["eventGameManager"])
+            self.reload = True
             self.manager.Switch("game")
         
 
@@ -58,8 +61,11 @@ class  GameScreen(Screen,EventKey):
         
 
     def on_enter(self, *args):
-        if self.event == None:
+        self.ids.rootTextInput.focus = True
+        if self.event == None or self.reload:
             self.display_event(self.Map.get_event(self.Player.x,self.Player.y))
+            self.reload = False
+            self.eventPast = False
         return super().on_enter(*args)
 
 
@@ -78,6 +84,7 @@ class  GameScreen(Screen,EventKey):
                 self.display_event(self.Map.get_event(self.Player.x,self.Player.y))
         else:
             if instance.text.lower() in self.event.rep:
+                self.Map.tiles[self.Player.y][self.Player.x] = 0
                 if self.eventGameManager.IsNormalType():
                     self.hist.text = self.event.histfin + "\n where you want to go"
                     self.generatePosDep()
@@ -92,16 +99,21 @@ class  GameScreen(Screen,EventKey):
         if len(temp)>8:
             self.historyInput.text = temp[-1]
         instance.text = ""
+        Clock.schedule_once(self.refocus)
+        
+
+    def refocus(self,*args):
+        self.ids.rootTextInput.focus = True
 
     def generatePosDep(self):
         self.posDep = []
         if self.Player.y > 0:
             self.posDep.append("up")
-        if self.Player.y < 20:
+        if self.Player.y < 10:
             self.posDep.append("down")
         if self.Player.x > 0:
             self.posDep.append("left")
-        if self.Player.x < 20:
+        if self.Player.x < 10:
             self.posDep.append("right")
 
 

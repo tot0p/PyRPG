@@ -8,6 +8,8 @@ class Quete:
     def __init__(self,path) -> None:
         self.id = 0
         self.listquete = json.ReadJson(path)
+        self.x = 0
+        self.y = 0
 
     def GetBoss(self):
         return self.listquete[self.id]["enn"]
@@ -18,7 +20,9 @@ class Quete:
 
     def generate(self):
         # return (1,1)
-        return (random.randint(0, 19),random.randint(0, 19))
+        self.x =random.randint(0, 9)
+        self.y = random.randint(0, 9)
+        return (self.y,self.x)
 
     def Next(self):
         self.id += 1
@@ -26,8 +30,8 @@ class Quete:
 
 class Map:
     def __init__(self,seed,nmax=20) -> None:
-        self.width = 20
-        self.height = 20
+        self.width = 10
+        self.height = 10
         self.quest = [Quete("src/data/boss.json")]
         self._seed = seed
         self.tiles = self.__generate_map()
@@ -60,7 +64,6 @@ class Map:
         if self.Only0():
             self.__generate_map()
         s = str(self.tiles[y][x])
-        self.tiles[y][x] = 0
         return s
     
     def Only0(self):

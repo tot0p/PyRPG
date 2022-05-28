@@ -17,7 +17,7 @@ class LevelUpScreen(Screen,EventKey):
         self.ids.LevelUpGrid.add_widget(Label(text="choose wich attack you want to learn"))
         self.randomAttackList = Get4RandomAtt(self.manager.currentGame.Player)
         for i in self.randomAttackList:
-            self.ids.LevelUpGrid.add_widget(Button(text=i.name+"\nDamage :"+str(i.damage),on_release= self.selectAttack))
+            self.ids.LevelUpGrid.add_widget(Button(text=i.name+"\nDamage : "+str(i.damage)+"\nSucces Chance : "+str(i.reusite)+" %",on_release= self.selectAttack))
         
     def __GetAttByName(self,name):
         try :
@@ -31,7 +31,7 @@ class LevelUpScreen(Screen,EventKey):
         if len(allAttPlayer) == 4:
             self.ids.LevelUpGrid.add_widget(Label(text="choose wich attack to replace"))
             for id,i in enumerate (allAttPlayer):
-                self.ids.LevelUpGrid.add_widget(Button(text=str(id+1) +" - "+i.name+"\nDamage :"+str(i.damage),on_release=lambda x :self.replaceAttack(int(x.text.split(" - ")[0])-1, self.__GetAttByName(button.text.split("\n")[0]), self.attackChoice)))
+                self.ids.LevelUpGrid.add_widget(Button(text=str(id+1) +" - "+i.name+"\nDamage : "+str(i.damage)+"\nSucces Chance : "+str(i.reusite)+" %",on_release=lambda x :self.replaceAttack(int(x.text.split(" - ")[0])-1, self.__GetAttByName(button.text.split("\n")[0]), self.attackChoice)))
         else:
             self.replaceAttack(len(allAttPlayer),self.__GetAttByName(button.text.split("\n")[0]), self.attackChoice)
     

@@ -11,7 +11,7 @@ class QuestListScreen(Screen,EventKey):
 
     def on_enter(self, *args):
         for i in self.manager.currentGame.Map.quest:
-            self.ids.QuestList.add_widget(Label(text="-"+ i.name))
+            self.ids.QuestList.add_widget(Label(text="-"+ i.name+"\nPosition : "+"x "+str(i.x)+" "+"y "+str(i.y)+"\nPlayer position : "+"x "+str(self.manager.currentGame.Player.x)+" "+"y "+str(self.manager.currentGame.Player.y)))
         return super().on_enter(*args)
 
     def on_leave(self):

@@ -16,7 +16,7 @@ class MapScreen(Screen, EventKey):
         player_y = self.manager.currentGame.Player.y
         for y in range(player_y - 2, player_y + 3):
             for x in range(player_x - 2, player_x + 3):
-                if x < 0 or y < 0:
+                if x < 0 or y < 0 or x > 9 or y > 9:
                     self.ids.map.add_widget(Label(text=" ", font_size=30))
                 elif x == player_x and y == player_y:
                     self.ids.map.add_widget(

@@ -58,7 +58,7 @@ class BattleScreen(Screen,EventKey):
     def Attack(self,args):
         self.ids.BattleButtons.clear_widgets()
         for i in self.Player.GetAtt():
-            self.ids.BattleButtons.add_widget(Button(text=i.name,on_release=lambda x : self.Player.attack(x.text,self.Enemy,lambda : self.Enemy.attack(self.Enemy.randomAtt().name, self.Player,lambda : self.BattleMenu("")))))
+            self.ids.BattleButtons.add_widget(Button(text=i.name+"\nDamage : "+str(i.damage)+"\nSucces Chance : "+str(i.reusite)+" %",on_release=lambda x : self.Player.attack(x.text.split("\n")[0],self.Enemy,lambda : self.Enemy.attack(self.Enemy.randomAtt().name, self.Player,lambda : self.BattleMenu("")))))
     
     def Items(self,args):
         self.ids.BattleButtons.clear_widgets()

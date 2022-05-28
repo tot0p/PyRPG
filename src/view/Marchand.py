@@ -37,4 +37,4 @@ class MarchandScreen(Screen,EventKey):
         
     def key_action(self, keybord, keycode, _, keyName, textContent):
         if keycode == 27:
-            self.exit()
+            pass
