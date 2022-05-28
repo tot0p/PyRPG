@@ -16,12 +16,14 @@ class NewGameScreen(Screen, EventKey):
         self.filename = "src/data/save"
 
     def on_enter(self, *args):
+        """event de kivy quand on entre sur le screen"""
         self.ids.nameNewGame.text = ""
         self.ids.seedNewGame.text = str(random.randrange(sys.maxsize))
         self.ids.nameerror.txt = ""
         return super().on_enter(*args)
 
     def __createGame(self):
+        """permet de creer une partie"""
         if self.ids.nameNewGame.text == "":
             self.ids.nameerror.text = "you cant have an empty name"
         else:

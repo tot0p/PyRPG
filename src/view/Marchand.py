@@ -6,18 +6,21 @@ from src.control.entities.Marchand import Marchand
 
 
 class MarchandScreen(Screen,EventKey):
+    """screen qui affiche la boutique"""
     def __init__(self,**kwargs) -> None:
         Screen.__init__(self,**kwargs)
         EventKey.__init__(self)
         self.inTrade = False
     
     def on_enter(self):
+        """event de kivy quand on entre sur le screen"""
         if not self.inTrade:
             self.marchand = Marchand(self.manager.currentGame.Player)
             self.inTrade = True
         self.drawItems()
 
     def drawItems(self):
+        """permet de draw tous les items"""
         self.ids.BuyGrid.clear_widgets()
         self.ids.SellGrid.clear_widgets()
         self.MarchandInv = self.marchand.items
@@ -28,10 +31,12 @@ class MarchandScreen(Screen,EventKey):
             self.ids.SellGrid.add_widget(Button(text=i.name+"\nQuantity : "+str(i.durability)+"\nPrice : "+str(self.marchand.Price(i.cost))+" "+self.marchand.type,on_release= lambda x : self.marchand.sell(x.text.split("\n")[0],self.drawItems)))
 
     def exit(self):
+        """permet d'exit le shop"""
         self.inTrade = False
         self.manager.Switch("game")
 
     def on_leave(self):
+        """event de kivy quand on quit sur le screen"""
         self.ids.BuyGrid.clear_widgets()
         self.ids.SellGrid.clear_widgets()
         

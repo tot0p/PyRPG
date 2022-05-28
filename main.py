@@ -15,7 +15,7 @@ __version__ = "1.0"
 __date__    = "26 may 2022"
 
 class PyRPGApp(App):
-    kv_directory = "src/data"
+    kv_directory = "src/data" # endroit ou le fichier d'interface est (src/data/pyrpg.kv)
 
     def build(self):
         sm = Manager()

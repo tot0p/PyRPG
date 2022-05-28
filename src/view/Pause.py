@@ -9,5 +9,3 @@ class  PauseScreen(Screen,EventKey):
     def key_action(self,keybord,keycode,_,keyName,textContent):
         if keycode == 27:
             self.manager.Switch("game")
-        elif keycode == 8:
-            self.ids.testcanvas.canvas.clear()

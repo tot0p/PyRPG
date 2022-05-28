@@ -33,4 +33,5 @@ class MenuScreen(Screen, EventKey):
             self.ids.gridMenu.add_widget(button)
 
     def on_enter(self):
+        """event de kivy quand on entre sur le screen"""
         self.manager.Reset()

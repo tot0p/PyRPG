@@ -7,6 +7,7 @@ from json import JSONEncoder
 
 
 class Player(entities):
+    '''représente le player'''
 
     def __init__(self,name,x=0,y=0) -> None:
         super().__init__(name,100,att=[attack(**ReadJson("src/data/attacks/attacks.json")[0]),None,None,None])
@@ -24,6 +25,7 @@ class Player(entities):
 
 
     def levelUp(self,xpReward):
+        ''' gere l'xp du player après un combat '''
         assert xpReward > 0 ; "xpReward can't < 0"
         self.xp += xpReward
         if self.xp >= self.level * 100:
@@ -33,31 +35,37 @@ class Player(entities):
         return False
 
     def AddObjByName(self,name,q=1):
+        '''permet d'ajouter un item au joueur via son nom'''
         for i in self._inv:
             if i.name == name:
                 i += q
 
     def DeleteItemByName(self,name):
+        '''permet de delete un item au joueur via son nom'''
         for i in self._inv:
             if i.name == name:
                 i -= 1
                 return i.cost
             
     def GetObjByName(self,name):
+        '''permet de recuperer un item au joueur via son nom'''
         try:
             return [i for i in self._inv if i.name == name][0]
         except:
             return None
 
     def GetAllInvNameAndPrice(self):
+        '''permet de recuperer une liste d'un tuple du nom de l'object avec son prix'''
         return  [(i.name,i.cost) for i in self._inv]
 
     @property
     def inv(self):
+        '''return un liste d'object avec seulement les utilisables'''
         return [i for i in self._inv if i.usable()]
 
 
     def move(self,s:str):
+        '''permet de se déplacé sur la map'''
         s = s.lower()
         dict = {
                 "up":lambda x,y : (x,y-1),
@@ -81,16 +89,16 @@ class Wallet:
         self.btc =  GetPrice("btc")
         self.xmr =  GetPrice("xmr")
 
-    def Save(self):
-        return "{"+ f"\"eur\":{self.eur},\"eth\":{self.eth},\"sol\":{self.sol},\"btc\":{self.btc},\"xmr\":{self.xmr}" + "}"
-
     def get(self,s):
+        '''permet de get la valeur de l'attribut s'''
         return getattr(self,s)
 
     def rm(self,s,n):
+        '''permet de supprimer n à l'attribut s'''
         if n>0:
             setattr(self,s,getattr(self,s)-n)
 
     def add(self,s,n):
+        '''permet d'ajouter n à l'attribut s'''
         if n>0:
             setattr(self,s,getattr(self,s)+n)

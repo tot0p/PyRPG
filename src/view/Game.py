@@ -29,10 +29,12 @@ class  GameScreen(Screen,EventKey):
         self.reload = False
 
     def LaunchGame(self,Player,Map):
+        """permet de lancer la game"""
         self.Player = Player
         self.Map = Map
     
     def SaveGame(self):
+        """permet de sauvegarder la game dans un json"""
         GameData = {
             "Player":jsonpickle.encode(self.Player),
             "Map":jsonpickle.encode(self.Map),
@@ -45,6 +47,7 @@ class  GameScreen(Screen,EventKey):
         self.manager.Switch("menu")
     
     def LoadGame(self):
+        """permet de load la game depuis un json"""
         if ExistFile("src/data/save.json"):
             t = ReadJson1Prof("src/data/save.json")
             self.event = t["event"]
@@ -61,6 +64,7 @@ class  GameScreen(Screen,EventKey):
         
 
     def on_enter(self, *args):
+        """event de kivy quand on entre sur le screen"""
         self.ids.rootTextInput.focus = True
         if self.event == None or self.reload:
             self.display_event(self.Map.get_event(self.Player.x,self.Player.y))
@@ -70,11 +74,13 @@ class  GameScreen(Screen,EventKey):
 
 
     def display_event(self,eventId):
+        """permet d'afficher l'event eventId"""
         self.event, self.special = self.eventGameManager.loadEvent(eventId)
         self.hist.text = self.event.hist
         self.rep.text = self.event.StrRep()
 
     def on_enter_textInput(self,instance):
+        """event de kivy quand on entre sur un textinput sur le screen"""
         self.historyInput.text = self.historyInput.text + "\n" + instance.text
         temp = self.historyInput.text.split("\n")
         if self.eventPast:
@@ -103,9 +109,11 @@ class  GameScreen(Screen,EventKey):
         
 
     def refocus(self,*args):
+        """permet de refocus sur le textinput"""
         self.ids.rootTextInput.focus = True
 
     def generatePosDep(self):
+        """genere les differentes dirrection ou le joueur peut aller"""
         self.posDep = []
         if self.Player.y > 0:
             self.posDep.append("up")

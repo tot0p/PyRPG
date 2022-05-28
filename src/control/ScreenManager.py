@@ -22,6 +22,7 @@ from src.view.Win import WinScreen
 
 
 class Manager(ScreenManager):
+    """screen manager de kivy modifier """
     
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -55,18 +56,22 @@ class Manager(ScreenManager):
         self.Switch("menu")
 
     def Switch(self,id):
+        """permet le switch de screen"""
         self.current = id
 
     
     def SwitchAtt(self,lootbox = True):
+        """permet le switch vers le choix d'attaque du level up avec ou sans lootbox"""
         self.Switch("levelup")
         self.currentLevelUp.openBox = lootbox
 
     def SwitchWallet(self,to="game"):
+        """permet le switch vers le wallet avec la redirection vers le screen du choix"""
         self.Switch("wallet")
         self.currentWallet.to=to
 
     def Reset(self):
+        """permet de reset l'affichage de tout les screens"""
         self.screens = self.screens[-3:]
         self.currentGame = GameScreen(name="game")
         self.add_widget(HelpScreen(name="help"))

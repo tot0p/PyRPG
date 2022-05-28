@@ -13,6 +13,7 @@ class InventoryScreen(Screen,EventKey):
         EventKey.__init__(self)
 
     def on_enter(self):
+        """event de kivy quand on entre sur le screen"""
         self.ids.Inventory.clear_widgets()
         for i in self.manager.currentGame.Player.inv:
             ObjGrid = GridLayout(cols = 1)
@@ -25,6 +26,7 @@ class InventoryScreen(Screen,EventKey):
             self.ids.Inventory.add_widget(ObjGrid)
             
     def on_leave(self):
+        """event de kivy quand on quit sur le screen"""
         self.ids.Inventory.clear_widgets()
 
     def key_action(self,keybord,keycode,_,keyName,textContent):

@@ -9,6 +9,9 @@ from random import choice
 from src.view.Crypto import GetPrice
     
 class BoxScreen(Screen,EventKey):
+    """
+    Screen de la box
+    """
     def __init__(self, **kwargs) -> None:
         self.i = 0
         self.isOpening = False
@@ -31,6 +34,7 @@ class BoxScreen(Screen,EventKey):
         
 
     def on_enter(self):
+        """event de kivy quand on entre sur le screen"""
         self.ids.CarouselGrid.clear_widgets()
         self.carousel = CarrouselBox(loop=True,anim_type="linear",anim_move_duration=0.1)
         for i in self.EventsList:
@@ -39,6 +43,7 @@ class BoxScreen(Screen,EventKey):
         self.ids.CarouselGrid.add_widget(self.carousel)
         
     def on_leave(self):
+        """event de kivy quand on quit sur le screen"""
         self.isOpening = False
         self.i = 0
         self.Att = False
@@ -46,6 +51,7 @@ class BoxScreen(Screen,EventKey):
         self.ids.LootboxBtn.on_release = self.open_box
 
     def displayLoot(self,loot):
+        """affiche le loot"""
         self.ids.LootboxBtn.text = "you won : \n" + str(loot)
         if self.Att:
             self.ids.LootboxBtn.on_release= lambda : self.manager.SwitchAtt(False)
@@ -53,12 +59,16 @@ class BoxScreen(Screen,EventKey):
             self.ids.LootboxBtn.on_release= lambda : self.manager.Switch("game")
 
     def open_box(self):
+        """ouvre la box"""
         if not self.isOpening:
             self.ids.LootboxBtn.text = "Oppening ..."
             self.isOpening = True
             self.event = Clock.schedule_interval( self.playAnymeLoot, 0.2)
 
     def playAnymeLoot(self,inter):
+        """
+        joue l'annimation d'ouverture
+        """
         if self.i > 20 :
             ev = choice(self.EventsList)
             self.carousel.load_slide(self.carousel.slides[self.EventsList.index(ev)])
@@ -77,6 +87,9 @@ class BoxScreen(Screen,EventKey):
     
 
 class EventsLootBox:
+    """
+    represente tous les events de la loot box
+    """
 
     def __init__(self,Name,img,desc,typ):
         self.Name = Name
@@ -85,6 +98,7 @@ class EventsLootBox:
         self.type = typ
 
     def active(self, player,lootbox):
+        """active la lootbox"""
         if self.type == "crypto":
             wallet =  player.wallet
             wallet.add(self.Name,GetPrice(self.Name))

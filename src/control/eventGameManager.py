@@ -3,6 +3,7 @@ from json import JSONEncoder
 
 
 class Event:
+    '''represente un event in game'''
     def __init__(self,type="",hist="",rep="",histfin="",**args):
         self.type = type
         self.hist = hist
@@ -11,6 +12,7 @@ class Event:
         self.currentId = ""
 
     def StrRep(self):
+        '''return les reponses sous forme de string'''
         return " ".join([x for x in self.rep])
 
     def __str__(self):
@@ -26,6 +28,9 @@ class EventGameManager:
             self.all_events[i]  = Event(**events[i])
 
     def loadEvent(self,id=""):
+        '''
+        permet de load un event via l'id
+        '''
         if id =="":
             id = self.currentId
         else:
@@ -37,6 +42,7 @@ class EventGameManager:
             return self.all_events["3"] , True
 
     def IsNormalType(self,id=""):
+        '''permet de définir si l'event est normal ou pas'''
         if id =="":
             id = self.currentId
         else:

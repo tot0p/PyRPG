@@ -5,6 +5,8 @@ from kivy.uix.gridlayout import GridLayout
 
 
 class MapScreen(Screen, EventKey):
+
+    """screen qui affiche la map"""
     def __init__(self, **kwargs) -> None:
         self.mapIco = {"-1":"🚩","0": "⬛", "1": "👤", "2": "🎁", "3": "💥"}
 
@@ -12,6 +14,7 @@ class MapScreen(Screen, EventKey):
         EventKey.__init__(self)
 
     def on_enter(self, *args):
+        """event de kivy quand on entre sur le screen"""
         player_x = self.manager.currentGame.Player.x
         player_y = self.manager.currentGame.Player.y
         for y in range(player_y - 2, player_y + 3):
@@ -39,6 +42,7 @@ class MapScreen(Screen, EventKey):
         return super().on_enter(*args)
 
     def on_leave(self, *args):
+        """event de kivy quand on quit sur le screen"""
         self.ids.map.clear_widgets()
 
     def key_action(self, keybord, keycode, _, keyName, textContent):

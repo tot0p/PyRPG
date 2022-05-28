@@ -7,6 +7,7 @@ from src.control.entities.att import GetAllAtt , attack
 from random import choice
 
 class BattleScreen(Screen,EventKey):
+    """represente le screen de la battle"""
     def __init__(self,**kwargs) -> None:
         Screen.__init__(self,**kwargs)
         EventKey.__init__(self)
@@ -14,6 +15,7 @@ class BattleScreen(Screen,EventKey):
 
 
     def createEnemy(self):
+        """creer l'enemie du screen"""
         temp = self.manager.currentGame.MonsterFight
         if self.manager.currentGame.special:
             t = self.manager.currentGame.Map.quest[0].GetBoss()
@@ -35,6 +37,7 @@ class BattleScreen(Screen,EventKey):
             self.manager.currentGame.MonsterFight +=1
 
     def on_enter(self):
+        """event de kivy quand on entre sur le screen"""
         self.createEnemy()
         self.Player = self.manager.currentGame.Player
         self.ids.PlayerName.text = self.Player.name
@@ -44,6 +47,7 @@ class BattleScreen(Screen,EventKey):
         return Screen.on_enter(self)
 
     def on_leave(self):
+        """event de kivy quand on sort sur le screen"""
         self.Player.resultOfLastAtt = None
         self.Enemy.resultOfLastAtt = None
         self.ids.ActionDisplayPlayer.text = "Player Action :"
@@ -56,11 +60,13 @@ class BattleScreen(Screen,EventKey):
         return Screen.on_leave(self)
         
     def Attack(self,args):
+        """affiche les guis de l'attack"""
         self.ids.BattleButtons.clear_widgets()
         for i in self.Player.GetAtt():
             self.ids.BattleButtons.add_widget(Button(text=i.name+"\nDamage : "+str(i.damage)+"\nSucces Chance : "+str(i.reusite)+" %",on_release=lambda x : self.Player.attack(x.text.split("\n")[0],self.Enemy,lambda : self.Enemy.attack(self.Enemy.randomAtt().name, self.Player,lambda : self.BattleMenu("")))))
     
     def Items(self,args):
+        """affiche les guis des items"""
         self.ids.BattleButtons.clear_widgets()
         if len(self.Player.inv)<=0:
             self.ids.BattleButtons.add_widget(Button(text="You have no items in your inventory",on_release=lambda x: self.BattleMenu("")))
@@ -69,10 +75,14 @@ class BattleScreen(Screen,EventKey):
                 self.ids.BattleButtons.add_widget(Button(text=i.name+"\nUse Left : "+i.GetNumberUse(),on_release=lambda x : self.Player.GetObjByName(x.text.split("\n")[0]).use(self.Player,self.Enemy,lambda : self.Enemy.attack(self.Enemy.randomAtt().name, self.Player,lambda : self.displayItemMessage(self.Player.GetObjByName(x.text.split("\n")[0]))))))
         
     def displayItemMessage(self,item):
+        """affiche le message des items"""
         self.Player.resultOfLastAtt = item.messageAction 
         self.BattleMenu("")
 
     def BattleMenu(self,args):
+        """
+        affiche le menu du combat
+        """
         if self.Player.hp <=0:
             self.manager.Switch("gameover")
             return

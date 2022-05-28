@@ -18,15 +18,18 @@ class  CryptoScreen(Screen,EventKey):
 
 
     def on_enter(self, *args):
+        """event de kivy quand on entre sur le screen"""
         self.draw()
         Window.bind(on_resize=self.draw)
         return super().on_enter(*args)
 
     def on_leave(self, *args):
+        """event de kivy quand on quit sur le screen"""
         Window.bind(on_resize = lambda x,y,z: 1+1)
         return super().on_leave(*args)
 
     def changeCrypto(self,name):
+        """permet de changer la current crypto"""
         self.current = name
         self.msft = yf.Ticker(name)
         self.hist = self.msft.history(period="1d",interval="5m")
@@ -35,6 +38,7 @@ class  CryptoScreen(Screen,EventKey):
         self.draw()
 
     def draw(self, *args):
+        """dessine le graphique et les differents elements graphiques dynamique"""
         self.draw_button()
         self.width,self.height = (Window.size[0]/3)*2,(Window.size[1]/3)*2
         self.posx,self.posy = Window.size[0]/3,Window.size[1]/3
@@ -48,6 +52,7 @@ class  CryptoScreen(Screen,EventKey):
         return Screen.on_enter(self,*args)
 
     def draw_button(self):
+        """dessine les button"""
         self.ids.btc.text = "BTC : " + str(self.manager.currentGame.Player.wallet.btc)
         self.ids.sol.text = "SOL : " + str(self.manager.currentGame.Player.wallet.sol)
         self.ids.eth.text = "ETH : " + str(self.manager.currentGame.Player.wallet.eth)
@@ -55,11 +60,14 @@ class  CryptoScreen(Screen,EventKey):
         self.ids.balanceeur.text = "Balance : " + str(self.manager.currentGame.Player.wallet.eur) + " €"
 
     def maxBuy(self):
+        """permet d'achete le max de la current crypto"""
         self.ids.amount.text = str(self.manager.currentGame.Player.wallet.eur/self.prices[len(self.prices)-1])
     def maxSell(self):
+        """permet de vendre le max de la current crypto"""
         self.ids.amount.text = str(self.manager.currentGame.Player.wallet.get(self.current.lower().split("-")[0]))
 
     def buy(self):
+        """permet de buy la current crypto"""
         try :
             if float(self.ids.amount.text)>0 and self.manager.currentGame.Player.wallet.eur >=float(self.ids.amount.text)*self.prices[len(self.prices)-1]:
                 self.manager.currentGame.Player.wallet.eur -= float(self.ids.amount.text)*self.prices[len(self.prices)-1]
@@ -69,6 +77,7 @@ class  CryptoScreen(Screen,EventKey):
             print("non non non !")
         
     def sell(self):
+        """permet de sell la current crypto"""
         try :
             if float(self.ids.amount.text)>0 and self.manager.currentGame.Player.wallet.get(self.current.lower().split("-")[0]) >=float(self.ids.amount.text):
                 self.manager.currentGame.Player.wallet.eur += float(self.ids.amount.text)*self.prices[len(self.prices)-1]
@@ -84,6 +93,7 @@ class  CryptoScreen(Screen,EventKey):
             self.manager.Switch(self.to)
 
 def GetPrice(crypto,price=100):
+    """permet de recuperer le nb de la crypto pour le price"""
     current = crypto.upper()+"-EUR"
     msft = yf.Ticker(current)
     hist = msft.history(period="1d",interval="5m")
