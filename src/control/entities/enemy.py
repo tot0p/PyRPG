@@ -3,7 +3,9 @@ from src.control.jsonfile import ReadJson
 from src.control.entities.att import attack
 
 class Enemy(entities):
-
+    '''
+    represent un Enemy , ou un boss
+    '''
     def __init__(self,name,hp,att,xpReward = 100) -> None:
         super().__init__(name,hp,att)
         self.xpReward = xpReward
@@ -15,6 +17,9 @@ class Enemy(entities):
 
 
 def LoadEnemy(id):
+    '''
+    Charge l'enemy depuis le fichier json
+    '''
     temp = ReadJson("src/data/monster.json")[id]
     allAtt = []
     for i in temp["att"]:

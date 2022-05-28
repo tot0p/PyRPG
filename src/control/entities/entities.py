@@ -8,6 +8,9 @@ from random import choice
 
 #Entities
 class entities:
+    '''
+    simule n'importe qu'elle entities du jeu avec une possibilité d'attack et de vie
+    '''
 
     def __init__(self,name,hp=100,att=[None,None,None,None]) -> None:
         self.name = name
@@ -17,13 +20,16 @@ class entities:
         self.resultOfLastAtt = None
 
     def GetAtt(self):
+        '''permet de récupérer les attacks de l'entities sauf celle égale à None'''
         return [i for i in self._att if i!=None ]
 
     def GetAttName(self):
+        '''recupere tous les attack name'''
         return [i.name for i in self._att if i!=None ]
 
     @property
     def att(self):
+        '''génere le string à afficher pour l'interface utilisateur '''
         result = ""
         count = 1
         for x in self._att:
@@ -36,10 +42,6 @@ class entities:
         '''
         est le setter de self.att qui prend comme expression type :
             votreEntities.att = (idDeLAttaque,LobjetAtt)
-
-        !!!!!!
-            on peut que assigner avec un tuple
-
         '''
         assert isinstance(v,tuple) ; "la valeur n'est pas un tuple"
         assert len(v)==2 ; "il n'y a pas le nombre de valeur demandé dans la valeur"
@@ -52,9 +54,11 @@ class entities:
 
 
     def randomAtt(self):
+        '''return un attack au hazard '''
         return choice(self._att)
 
     def attack(self,name:str,target,callback=lambda:print("")):
+        '''permet de lancé  une attack'''
         for i in self._att:
             if i != None:
                 if i.name == name:
