@@ -14,7 +14,7 @@ pip install --upgrade -r requirements.txt
     
 ## Authors
 
-- [@tot0p](https://www.github.com/tot0p)
-- [@mkarten](https://www.github.com/mkarten)
+- [@tot0p](https://www.github.com/tot0p) (all_entities , modification object kivy , items , les Managers , json, les events)
+- [@mkarten](https://www.github.com/mkarten)( map , les screens , le kv)
 
 
